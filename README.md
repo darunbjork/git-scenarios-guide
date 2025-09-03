@@ -9,7 +9,11 @@ A comprehensive, production-ready Git reference guide that goes beyond basic tut
 - **Copy-paste ready commands** - No pseudocode, real terminal commands
 - **Progressive complexity** - From setup to advanced Git operations
 
-## 🚀 Features
+## 🚀 Live Demo
+
+You can view the live application at: https://darun-git-guidenetlifyapp.netlify.app
+
+## ✨ Features
 
 - 📱 Responsive design that works on all devices
 - 🔍 Real-time search across all scenarios
