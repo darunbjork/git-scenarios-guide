@@ -65,7 +65,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
@@ -125,6 +125,8 @@
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
             font-size: 0.85rem;
             line-height: 1.4;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         .code-comment {
@@ -255,6 +257,25 @@
 
             .scenario-card {
                 padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 0.5rem;
+            }
+
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+
+            .copy-button {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.7rem;
             }
         }
 
