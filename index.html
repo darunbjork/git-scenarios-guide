@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Commands for Real-World Scenarios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #7d8590;
+            --accent: #58a6ff;
+            --accent-hover: #1f6feb;
+            --border: #30363d;
+            --code-bg: #0d1117;
+            --success: #238636;
+            --warning: #d29922;
+            --danger: #da3633;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--accent), #f78166);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .scenario-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .scenario-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .scenario-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .scenario-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block pre {
+            color: var(--text-primary);
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .code-comment {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-button:hover {
+            background: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .problem-box {
+            background: rgba(218, 54, 51, 0.1);
+            border: 1px solid var(--danger);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .problem-title {
+            color: var(--danger);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-box {
+            background: rgba(35, 134, 54, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .solution-title {
+            color: var(--success);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box {
+            background: rgba(210, 153, 34, 0.1);
+            border: 1px solid var(--warning);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip-title {
+            color: var(--warning);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 0.25rem;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .nav-tab:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-tab.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .scenario-card {
+                padding: 1rem;
+            }
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧑‍💻 Git Commands for Real-World Scenarios</h1>
+            <p class="subtitle">Production-ready Git workflows for engineering teams</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search scenarios... (e.g., 'merge conflict', 'undo commit', 'branch')">
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('basics')">Diagnostics & Setup</button>
+            <button class="nav-tab" onclick="showTab('workflows')">Workflows</button>
+            <button class="nav-tab" onclick="showTab('troubleshooting')">Troubleshooting</button>
+            <button class="nav-tab" onclick="showTab('advanced')">Advanced</button>
+        </div>
+
+        <div id="basics" class="tab-content active">
+            <div class="grid">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🔍</span>
+                        <h3 class="scenario-title">Repository Diagnostics</h3>
+                    </div>
+                    <p class="scenario-description">First step in debugging any Git issue: understand your current state.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Check if current folder is a Git repo
+ls -a                                    # Show hidden files (.git folder)
+git rev-parse --is-inside-work-tree     # Returns true/false
+git status                              # Current repo state
+git remote -v                          # Show remote URLs
+git branch -a                          # List all branches</pre>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">💡 Pro Tip</div>
+                        Run these commands first when inheriting any codebase or debugging Git issues.
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🌱</span>
+                        <h3 class="scenario-title">Starting Fresh (New Project)</h3>
+                    </div>
+                    <p class="scenario-description">Initialize a new repository and connect to GitHub.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Navigate to your project
+cd ~/Documents/my-project
+
+# Initialize Git repo
+git init
+git add .
+git commit -m "Initial commit"
+
+# Set main branch and connect to GitHub
+git branch -M main
+git remote add origin https://github.com/username/repo.git
+git push -u origin main</pre>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">📦</span>
+                        <h3 class="scenario-title">Cloning Existing Repo</h3>
+                    </div>
+                    <p class="scenario-description">Get a copy of an existing repository.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Clone from GitHub
+git clone https://github.com/username/repo.git
+
+# Navigate into the repo
+cd repo
+
+# Verify setup
+git remote -v
+git branch -a</pre>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🗑️</span>
+                        <h3 class="scenario-title">Ignore Files (.gitignore)</h3>
+                    </div>
+                    <p class="scenario-description">Prevent sensitive or generated files from being tracked.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Create .gitignore file
+touch .gitignore
+
+# Common patterns for React/Node.js projects:
+node_modules/
+.env
+.env.local
+.DS_Store
+dist/
+build/
+*.log
+.vscode/
+.idea/</pre>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">💡 Pro Tip</div>
+                        Use <a href="https://gitignore.io" style="color: var(--accent);">gitignore.io</a> to generate .gitignore templates for your stack.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="workflows" class="tab-content">
+            <div class="grid">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🔀</span>
+                        <h3 class="scenario-title">Feature Branch Workflow</h3>
+                    </div>
+                    <p class="scenario-description">Standard workflow for feature development in teams.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Create and switch to feature branch
+git checkout -b feature/user-authentication
+
+# Make your changes, then commit
+git add .
+git commit -m "Add user authentication system"
+
+# Push feature branch
+git push -u origin feature/user-authentication
+
+# Switch back to main and merge
+git checkout main
+git merge feature/user-authentication
+
+# Clean up
+git branch -d feature/user-authentication
+git push origin --delete feature/user-authentication</pre>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🛟</span>
+                        <h3 class="scenario-title">Stashing Work</h3>
+                    </div>
+                    <p class="scenario-description">Temporarily save uncommitted changes.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Save current changes
+git stash
+
+# Save with a message
+git stash push -m "WIP: refactoring auth logic"
+
+# List stashes
+git stash list
+
+# Apply latest stash
+git stash pop
+
+# Apply specific stash
+git stash pop stash@{1}
+
+# Apply without removing from stash
+git stash apply
+
+# Delete stash
+git stash drop stash@{1}</pre>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">📌</span>
+                        <h3 class="scenario-title">Tagging Releases</h3>
+                    </div>
+                    <p class="scenario-description">Mark specific commits as release points.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Create lightweight tag
+git tag v1.0.0
+
+# Create annotated tag (recommended)
+git tag -a v1.0.0 -m "Release version 1.0.0"
+
+# Tag specific commit
+git tag -a v1.0.1 abc1234 -m "Hotfix release"
+
+# Push tags to remote
+git push origin --tags
+
+# List tags
+git tag -l
+
+# Delete tag
+git tag -d v1.0.0
+git push origin --delete v1.0.0</pre>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🕒</span>
+                        <h3 class="scenario-title">History & Inspection</h3>
+                    </div>
+                    <p class="scenario-description">Examine commit history and changes.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Compact history
+git log --oneline
+
+# Detailed history with stats
+git log --stat
+
+# Visual branch history
+git log --graph --pretty=format:'%h -%d %s (%cr) &lt;%an&gt;'
+
+# See who changed each line
+git blame filename
+
+# Show changes in specific commit
+git show abc1234
+
+# Compare branches
+git diff main..feature/login</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="troubleshooting" class="tab-content">
+            <div class="grid">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">❌</span>
+                        <h3 class="scenario-title">Wrong Git Root</h3>
+                    </div>
+                    
+                    <div class="problem-box">
+                        <div class="problem-title">Problem:</div>
+                        You ran <code>git init</code> in the wrong directory and Git is tracking too many files.
+                    </div>
+
+                    <div class="solution-box">
+                        <div class="solution-title">Solution:</div>
+                        <div class="code-block">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre># Navigate to wrong directory
+cd ~/Documents
+
+# Check if Git repo exists
+ls -a
+
+# Remove the wrong Git repo
+rm -rf .git
+
+# Navigate to correct project folder
+cd ~/Documents/my-project
+
+# Initialize Git in correct location
+git init
+git add .
+git commit -m "Initial commit"</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🔄</span>
+                        <h3 class="scenario-title">Wrong Remote URL</h3>
+                    </div>
+                    
+                    <div class="problem-box">
+                        <div class="problem-title">Problem:</div>
+                        You pushed to the wrong repository or need to change remote URL.
+                    </div>
+
+                    <div class="solution-box">
+                        <div class="solution-title">Solution:</div>
+                        <div class="code-block">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre># Check current remote
+git remote -v
+
+# Remove current remote
+git remote remove origin
+
+# Add correct remote
+git remote add origin https://github.com/username/correct-repo.git
+
+# Push to correct repository
+git push -u origin main</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">⚠️</span>
+                        <h3 class="scenario-title">Merge Conflicts</h3>
+                    </div>
+                    
+                    <div class="problem-box">
+                        <div class="problem-title">Problem:</div>
+                        Git can't automatically merge changes from different branches.
+                    </div>
+
+                    <div class="solution-box">
+                        <div class="solution-title">Solution:</div>
+                        <div class="code-block">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre># When merge conflict occurs
+git status                    # See conflicted files
+
+# Edit conflicted files manually
+# Look for markers: &lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, &gt;&gt;&gt;&gt;&gt;&gt;&gt;
+# Choose which changes to keep
+
+# After resolving conflicts
+git add &lt;resolved-file&gt;
+git commit
+
+# Abort merge if needed
+git merge --abort</pre>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">💡 Pro Tip</div>
+                        Use VS Code's built-in merge conflict resolver or tools like GitKraken for visual conflict resolution.
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">⏪</span>
+                        <h3 class="scenario-title">Undoing Commits</h3>
+                    </div>
+                    <p class="scenario-description">Various ways to undo changes depending on your situation.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Unstage file (keep changes)
+git reset HEAD filename
+
+# Undo last commit, keep changes staged
+git reset --soft HEAD~1
+
+# Undo last commit, keep changes unstaged
+git reset HEAD~1
+
+# Undo last commit, discard changes (DANGEROUS)
+git reset --hard HEAD~1
+
+# Undo multiple commits
+git reset --hard HEAD~3
+
+# Create new commit that undoes previous commit
+git revert abc1234</pre>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">⚠️ Warning</div>
+                        <code>git reset --hard</code> permanently destroys uncommitted changes. Use with caution.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="advanced" class="tab-content">
+            <div class="grid">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🔧</span>
+                        <h3 class="scenario-title">Interactive Rebase</h3>
+                    </div>
+                    <p class="scenario-description">Rewrite commit history for cleaner project timeline.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Rebase last 3 commits interactively
+git rebase -i HEAD~3
+
+# Common rebase commands in editor:
+# pick = use commit
+# reword = edit commit message
+# edit = stop to modify commit
+# squash = combine with previous commit
+# fixup = like squash but discard message
+# drop = remove commit
+
+# Force push after rebase (be careful!)
+git push --force-with-lease</pre>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">⚠️ Warning</div>
+                        Never rebase commits that have been pushed to shared branches. Only rebase private feature branches.
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🍒</span>
+                        <h3 class="scenario-title">Cherry-picking</h3>
+                    </div>
+                    <p class="scenario-description">Apply specific commits to another branch.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Apply specific commit to current branch
+git cherry-pick abc1234
+
+# Apply multiple commits
+git cherry-pick abc1234 def5678
+
+# Apply commit range
+git cherry-pick abc1234..def5678
+
+# Cherry-pick without committing (for review)
+git cherry-pick --no-commit abc1234</pre>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🔍</span>
+                        <h3 class="scenario-title">Advanced Search</h3>
+                    </div>
+                    <p class="scenario-description">Find commits, changes, and content across history.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Search for commits by message
+git log --grep="auth"
+
+# Search for commits by author
+git log --author="john@example.com"
+
+# Search for code changes
+git log -S "function login"
+
+# Search in commit diffs
+git log -G "regex-pattern"
+
+# Find when file was deleted
+git log --follow -- filename
+
+# Show commits that touched specific lines
+git blame -L 10,20 filename</pre>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🧹</span>
+                        <h3 class="scenario-title">Repository Cleanup</h3>
+                    </div>
+                    <p class="scenario-description">Maintain repository health and performance.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Remove untracked files and directories
+git clean -fd
+
+# Remove files from git but keep locally
+git rm --cached filename
+git rm --cached -r directory/
+
+# Garbage collect and optimize
+git gc
+
+# Remove remote tracking branches that no longer exist
+git remote prune origin
+
+# Show repository size
+du -sh .git
+
+# Compress repository
+git gc --aggressive</pre>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🔐</span>
+                        <h3 class="scenario-title">Security & Secrets</h3>
+                    </div>
+                    <p class="scenario-description">Handle sensitive data and security concerns.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Remove sensitive file from history (NUCLEAR OPTION)
+git filter-branch --force --index-filter \
+  'git rm --cached --ignore-unmatch secrets.txt' \
+  --prune-empty --tag-name-filter cat -- --all
+
+# Modern alternative using git-filter-repo
+git filter-repo --path secrets.txt --invert-paths
+
+# Check for secrets before committing
+git diff --cached | grep -i "password\|key\|secret"
+
+# Set up git hooks for secret scanning
+# (requires additional tooling like pre-commit hooks)</pre>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">💡 Pro Tip</div>
+                        Use tools like <code>git-secrets</code>, <code>truffleHog</code>, or GitHub's secret scanning to prevent secrets from being committed.
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">⚡</span>
+                        <h3 class="scenario-title">Performance Optimization</h3>
+                    </div>
+                    <p class="scenario-description">Optimize Git performance for large repositories.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Enable parallel processing
+git config core.preloadindex true
+git config core.fscache true
+
+# Shallow clone for faster downloads
+git clone --depth 1 https://github.com/user/repo.git
+
+# Partial clone (Git 2.19+)
+git clone --filter=blob:none https://github.com/user/repo.git
+
+# Enable Git LFS for large files
+git lfs install
+git lfs track "*.zip"
+git add .gitattributes
+
+# Configure Git for better performance
+git config pack.threads 4
+git config pack.windowMemory 100m</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built for production environments. Save this reference and never get stuck with Git again.</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const code = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'var(--success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'var(--bg-tertiary)';
+                }, 2000);
+            });
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.scenario-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.scenario-title').textContent.toLowerCase();
+                const description = card.querySelector('.scenario-description').textContent.toLowerCase();
+                const code = card.querySelector('pre') ? card.querySelector('pre').textContent.toLowerCase() : '';
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || code.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Add smooth scrolling for internal links
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize with first tab
+            showTab('basics');
+        });
+    </script>
+</body>
+</html>
