@@ -35,75 +35,134 @@
             <button class="nav-tab" onclick="showTab(event, 'workflows')">Workflows</button>
             <button class="nav-tab" onclick="showTab(event, 'troubleshooting')">Troubleshooting</button>
             <button class="nav-tab" onclick="showTab(event, 'advanced')">Advanced</button>
+            <button class="nav-tab" onclick="showTab(event, 'shell')">Basic Shell Commands</button>
+            <button class="nav-tab" onclick="showTab(event, 'docker')">Docker Commands</button>
+            <button class="nav-tab" onclick="showTab(event, 'deleting')">⚠️ Deleting & Destroying</button>
+        </div>
+
+        <div id="shell" class="tab-content">
+            <div class="grid">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">⚙️</span>
+                        <h3 class="scenario-title">File System Navigation</h3>
+                    </div>
+                    <p class="scenario-description">Basic commands for navigating the file system.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># List files and directories
+ls -la
+
+# Change directory
+cd /path/to/directory
+
+# Print working directory
+pwd</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="docker" class="tab-content">
+            <div class="grid">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🐳</span>
+                        <h3 class="scenario-title">Container Management</h3>
+                    </div>
+                    <p class="scenario-description">Basic commands for managing Docker containers.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># List running containers
+docker ps
+
+# List all containers
+docker ps -a
+
+# Stop a container
+docker stop <container_id>
+
+# Remove a container
+docker rm <container_id></pre>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="basics" class="tab-content">
             <div class="grid">
                 <div class="scenario-card">
                     <div class="scenario-header">
-                        <span class="scenario-icon">🔍</span>
-                        <h3 class="scenario-title">Repository Diagnostics</h3>
+                        <span class="scenario-icon">⚙️</span>
+                        <h3 class="scenario-title">Initial Configuration</h3>
                     </div>
-                    <p class="scenario-description">First step in debugging any Git issue: understand your current state.</p>
+                    <p class="scenario-description">Configure your Git identity and settings. This is a one-time setup.</p>
                     
                     <div class="code-block">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Check if current folder is a Git repo
-ls -a                                    # Show hidden files (.git folder)
-git rev-parse --is-inside-work-tree     # Returns true/false
-git status                              # Current repo state
-git remote -v                          # Show remote URLs
-git branch -a                          # List all branches</pre>
-                    </div>
+                        <pre># Set your name for all repositories
+git config --global user.name "Your Name"
 
+# Set your email for all repositories
+git config --global user.email "you@example.com"
+
+# View all global config settings
+git config --list
+
+# Get a specific config value
+git config --get user.name</pre>
+                    </div>
                     <div class="tip-box">
                         <div class="tip-title">💡 Pro Tip</div>
-                        Run these commands first when inheriting any codebase or debugging Git issues.
+                        The <code>--global</code> flag applies these settings to every repo on your system. Omit it to set config for the current repo only.
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🔍</span>
+                        <h3 class="scenario-title">Repository Diagnostics & Help</h3>
+                    </div>
+                    <p class="scenario-description">Commands to understand your current repository state and get help.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Show the current status of your repo
+git status
+
+# List all local and remote branches
+git branch -a
+
+# Show remote repository URLs
+git remote -v
+
+# Get help for a specific command
+git help commit</pre>
                     </div>
                 </div>
 
                 <div class="scenario-card">
                     <div class="scenario-header">
                         <span class="scenario-icon">🌱</span>
-                        <h3 class="scenario-title">Starting Fresh (New Project)</h3>
+                        <h3 class="scenario-title">Creating a Repository</h3>
                     </div>
-                    <p class="scenario-description">Initialize a new repository and connect to GitHub.</p>
+                    <p class="scenario-description">Initialize a new repository locally or clone an existing one.</p>
                     
                     <div class="code-block">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Navigate to your project
-cd ~/Documents/my-project
-
-# Initialize Git repo
+                        <pre># Initialize a new repository in the current directory
 git init
-git add .
-git commit -m "Initial commit"
 
-# Set main branch and connect to GitHub
-git branch -M main
-git remote add origin https://github.com/username/repo.git
-git push -u origin main</pre>
-                    </div>
-                </div>
+# --- OR --- 
 
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">📦</span>
-                        <h3 class="scenario-title">Cloning Existing Repo</h3>
-                    </div>
-                    <p class="scenario-description">Get a copy of an existing repository.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Clone from GitHub
-git clone https://github.com/username/repo.git
+# Clone an existing repository from a URL
+# Note: clone is not supported in the simulator
+git clone https://github.com/user/repo.git
 
-# Navigate into the repo
-cd repo
-
-# Verify setup
-git remote -v
-git branch -a</pre>
+# Clone only a specific branch
+git clone --branch main https://github.com/user/repo.git</pre>
                     </div>
                 </div>
 
@@ -119,21 +178,11 @@ git branch -a</pre>
                         <pre># Create .gitignore file
 touch .gitignore
 
-# Common patterns for React/Node.js projects:
+# Example patterns:
 node_modules/
 .env
-.env.local
-.DS_Store
-dist/
 build/
-*.log
-.vscode/
-.idea/</pre>
-                    </div>
-
-                    <div class="tip-box">
-                        <div class="tip-title">💡 Pro Tip</div>
-                        Use <a href="https://gitignore.io" style="color: var(--accent);">gitignore.io</a> to generate .gitignore templates for your stack.
+*.log</pre>
                     </div>
                 </div>
             </div>
@@ -162,11 +211,11 @@ git push -u origin feature/user-authentication
 
 # Switch back to main and merge
 git checkout main
-git merge feature/user-authentication
-
-# Clean up
-git branch -d feature/user-authentication
-git push origin --delete feature/user-authentication</pre>
+git merge feature/user-authentication</pre>
+                    </div>
+                     <div class="tip-box">
+                        <div class="tip-title">💡 Pro Tip</div>
+                        After merging, you can delete the branch. See the "Deleting & Destroying" tab for how to do this safely.
                     </div>
                 </div>
 
@@ -224,11 +273,7 @@ git tag -a v1.0.1 abc1234 -m "Hotfix release"
 git push origin --tags
 
 # List tags
-git tag -l
-
-# Delete tag
-git tag -d v1.0.0
-git push origin --delete v1.0.0</pre>
+git tag -l</pre>
                     </div>
                 </div>
 
@@ -385,19 +430,13 @@ git reset --soft HEAD~1
 # Undo last commit, keep changes unstaged
 git reset HEAD~1
 
-# Undo last commit, discard changes (DANGEROUS)
-git reset --hard HEAD~1
-
-# Undo multiple commits
-git reset --hard HEAD~3
-
 # Create new commit that undoes previous commit
 git revert abc1234</pre>
                     </div>
 
                     <div class="tip-box">
                         <div class="tip-title">⚠️ Warning</div>
-                        <code>git reset --hard</code> permanently destroys uncommitted changes. Use with caution.
+                        To permanently discard changes, see the "Discard Local Changes" card in the "Deleting & Destroying" tab.
                     </div>
                 </div>
             </div>
@@ -496,14 +535,7 @@ git blame -L 10,20 filename</pre>
                     
                     <div class="code-block">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Remove untracked files and directories
-git clean -fd
-
-# Remove files from git but keep locally
-git rm --cached filename
-git rm --cached -r directory/
-
-# Garbage collect and optimize
+                        <pre># Garbage collect and optimize
 git gc
 
 # Remove remote tracking branches that no longer exist
@@ -526,15 +558,7 @@ git gc --aggressive</pre>
                     
                     <div class="code-block">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Remove sensitive file from history (NUCLEAR OPTION)
-git filter-branch --force --index-filter \
-  'git rm --cached --ignore-unmatch secrets.txt' \
-  --prune-empty --tag-name-filter cat -- --all
-
-# Modern alternative using git-filter-repo
-git filter-repo --path secrets.txt --invert-paths
-
-# Check for secrets before committing
+                        <pre># Check for secrets before committing
 git diff --cached | grep -i "password\|key\|secret"
 
 # Set up git hooks for secret scanning
@@ -543,7 +567,7 @@ git diff --cached | grep -i "password\|key\|secret"
 
                     <div class="tip-box">
                         <div class="tip-title">💡 Pro Tip</div>
-                        Use tools like <code>git-secrets</code>, <code>truffleHog</code>, or GitHub's secret scanning to prevent secrets from being committed.
+                        To remove secrets from history, see the "Deleting & Destroying" tab. Use tools like <code>git-secrets</code> or GitHub's secret scanning to prevent secrets from being committed.
                     </div>
                 </div>
 
@@ -574,6 +598,122 @@ git add .gitattributes
 # Configure Git for better performance
 git config pack.threads 4
 git config pack.windowMemory 100m</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="deleting" class="tab-content">
+            <div class="grid">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">❌</span>
+                        <h3 class="scenario-title">Delete Branches</h3>
+                    </div>
+                    <p class="scenario-description">Remove local and remote branches.</p>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Delete a local branch (safe)
+# Won't delete if it has unmerged changes
+git branch -d feature/old-feature
+
+# Delete a local branch (force)
+# Deletes branch even with unmerged changes
+git branch -D feature/old-feature
+
+# Delete a remote branch
+git push origin --delete feature/old-feature</pre>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-title">💡 Pro Tip</div>
+                        Clean up merged branches regularly to keep your repository tidy.
+                    </div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🏷️</span>
+                        <h3 class="scenario-title">Delete Tags</h3>
+                    </div>
+                    <p class="scenario-description">Remove local and remote tags.</p>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Delete a local tag
+git tag -d v1.0.0
+
+# Delete a remote tag
+git push origin --delete v1.0.0</pre>
+                    </div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">📁</span>
+                        <h3 class="scenario-title">Remove Files & Untrack</h3>
+                    </div>
+                    <p class="scenario-description">Remove files from Git's tracking index.</p>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Stop tracking a file but keep it locally
+# (e.g., a config file that was accidentally committed)
+git rm --cached config.js
+
+# Remove a file from both Git and filesystem
+git rm file.log
+
+# Clean untracked files from working directory
+# -n: dry run (shows what would be deleted)
+git clean -n
+# -f: force (actually deletes the files)
+git clean -f
+# -fd: force delete files and directories
+git clean -fd</pre>
+                    </div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🗑️</span>
+                        <h3 class="scenario-title">Discard Local Changes</h3>
+                    </div>
+                    <p class="scenario-description">Permanently throw away uncommitted changes.</p>
+                    <div class="problem-box">
+                        <div class="problem-title">DANGER ZONE:</div>
+                        These commands permanently destroy work. There is no undo.
+                    </div>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Discard changes in a specific file
+git checkout -- path/to/file.js
+
+# Discard all local changes in all files
+git reset --hard
+
+# Discard all local changes and remove all untracked files
+git reset --hard && git clean -fd</pre>
+                    </div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">📜</span>
+                        <h3 class="scenario-title">Remove from History</h3>
+                    </div>
+                    <p class="scenario-description">Completely remove a file from the entire project history.</p>
+                     <div class="problem-box">
+                        <div class="problem-title">NUCLEAR OPTION:</div>
+                        This rewrites history. All collaborators will need to re-clone or perform a complex rebase. Use with extreme caution.
+                    </div>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Use the modern git-filter-repo tool
+# (Install first: pip install git-filter-repo)
+
+# Completely remove a file from all commits
+git filter-repo --path path/to/sensitive-file.txt --invert-paths
+
+# Remove a folder from all commits
+git filter-repo --path path/to/folder/ --invert-paths --force
+
+# Push the rewritten history
+# You MUST coordinate with your team before this step
+git push --force-with-lease</pre>
                     </div>
                 </div>
             </div>
@@ -653,9 +793,15 @@ git config pack.windowMemory 100m</pre>
             commits: [],
             staged: [],
             unstaged: [],
-            tags: [],
-            remotes: []
+            tags: {},
+            remotes: {},
+            reflog: []
         };
+
+        function logRef(message) {
+            const headCommit = gitState.commits[gitState.commits.length - 1];
+            gitState.reflog.unshift(`HEAD@{${gitState.reflog.length}}: ${message}: ${headCommit ? headCommit.id.substring(0,7) : 'initial'} - ${gitState.currentBranch}`);
+        }
 
         function executeCommand() {
             const input = document.getElementById('commandInput');
@@ -700,7 +846,8 @@ git config pack.windowMemory 100m</pre>
                     gitState.initialized = true;
                     gitState.currentBranch = 'main';
                     gitState.branches = ['main'];
-                    gitState.commits = [{ id: 'abc1234', message: 'Initial commit', branch: 'main' }];
+                    gitState.commits = [{ id: 'abc1234', message: 'Initial commit', branch: 'main', author: 'Simulator', date: new Date().toUTCString() }];
+                    logRef('commit (initial)');
                     return 'Initialized empty Git repository in /simulator/project';
 
                 case 'checkout':
@@ -711,9 +858,12 @@ git config pack.windowMemory 100m</pre>
                         }
                         gitState.branches.push(newBranch);
                         gitState.currentBranch = newBranch;
+                        logRef(`checkout: moving from ${gitState.currentBranch} to ${newBranch}`);
                         return `Switched to a new branch '${newBranch}'`;
                     } else if (parts[2] && gitState.branches.includes(parts[2])) {
+                        const fromBranch = gitState.currentBranch;
                         gitState.currentBranch = parts[2];
+                        logRef(`checkout: moving from ${fromBranch} to ${gitState.currentBranch}`);
                         return `Switched to branch '${parts[2]}'`;
                     } else if (parts[2]) {
                         throw new Error(`Branch '${parts[2]}' does not exist`);
@@ -745,9 +895,12 @@ git config pack.windowMemory 100m</pre>
                         id: commitId,
                         message,
                         branch: gitState.currentBranch,
-                        parent: gitState.commits.find(c => c.branch === gitState.currentBranch)?.id || null
+                        author: 'Simulator',
+                        date: new Date().toUTCString(),
+                        parent: gitState.commits.filter(c => c.branch === gitState.currentBranch).pop()?.id || 'abc1234'
                     });
                     gitState.staged = [];
+                    logRef('commit');
                     return `[${gitState.currentBranch} ${commitId}] ${message}`;
 
                 case 'merge':
@@ -756,30 +909,101 @@ git config pack.windowMemory 100m</pre>
                         throw new Error(`Branch '${mergeBranch}' does not exist`);
                     }
                     if (mergeBranch === gitState.currentBranch) {
-                        throw new Error('Already on \'' + mergeBranch + '\'');
+                        throw new Error('Already on \\' + mergeBranch + '\'');
                     }
-                    const mergeId = Math.random().toString(36).substr(2, 7);
+                    const mergeCommitId = Math.random().toString(36).substr(2, 7);
                     gitState.commits.push({
-                        id: mergeId,
+                        id: mergeCommitId,
                         message: `Merge branch '${mergeBranch}' into ${gitState.currentBranch}`,
                         branch: gitState.currentBranch,
+                        author: 'Simulator',
+                        date: new Date().toUTCString(),
                         type: 'merge'
                     });
+                    logRef(`merge ${mergeBranch}`)
                     return `Merged branch '${mergeBranch}' into '${gitState.currentBranch}'`;
 
                 case 'branch':
-                     if (parts[2]) {
+                    if ((parts[2] === '-d' || parts[2] === '-D') && parts[3]) {
+                        const branchToDelete = parts[3];
+                        if (branchToDelete === 'main') {
+                            throw new Error('Cannot delete the main branch.');
+                        }
+                        const branchIndex = gitState.branches.indexOf(branchToDelete);
+                        if (branchIndex === -1) {
+                            throw new Error(`Branch '${branchToDelete}' not found.`);
+                        }
+                        gitState.branches.splice(branchIndex, 1);
+                        if (gitState.currentBranch === branchToDelete) {
+                            gitState.currentBranch = 'main';
+                            return `Deleted branch ${branchToDelete} and switched to branch main.`;
+                        }
+                        return `Deleted branch ${branchToDelete}.`;
+                    } else if (parts[2]) {
                         const newBranch = parts[2];
+                        if (newBranch.startsWith('-')) {
+                            throw new Error(`Invalid branch name '${newBranch}'. Branch names cannot start with a dash.`);
+                        }
                         if (gitState.branches.includes(newBranch)) {
                             throw new Error(`Branch '${newBranch}' already exists`);
                         }
                         gitState.branches.push(newBranch);
                         return `Created branch '${newBranch}'`;
                     } else {
-                        return gitState.branches.map(b => 
-                            b === gitState.currentBranch ? `* ${b}` : `  ${b}`
-                        ).join('\n');
+                        return gitState.branches.map(b => b === gitState.currentBranch ? `* ${b}` : `  ${b}`).join('\n');
                     }
+                
+                case 'reset':
+                    const target = parts[2];
+                    if (!target) throw new Error('Please specify a file to reset.');
+                    const stagedIndex = gitState.staged.indexOf(target);
+                    if (stagedIndex > -1) {
+                        gitState.staged.splice(stagedIndex, 1);
+                        return `Unstaged ${target}`;
+                    }
+                    return `File ${target} not staged.`;
+
+                case 'rm':
+                    const fileToRemove = parts[2];
+                    if (!fileToRemove) throw new Error('Please specify a file to remove.');
+                    // This is a simplified rm, it just unstages.
+                    const stagedFileIndex = gitState.staged.indexOf(fileToRemove);
+                    if (stagedFileIndex > -1) {
+                        gitState.staged.splice(stagedFileIndex, 1);
+                        return `rm '${fileToRemove}'`;
+                    }
+                    throw new Error(`File not found in staging area: ${fileToRemove}`);
+
+                case 'remote':
+                    if (parts[2] === 'add' && parts[3] && parts[4]) {
+                        gitState.remotes[parts[3]] = parts[4];
+                        return `Added remote '${parts[3]}'`;
+                    }
+                    if (parts[2] === '-v') {
+                        let remoteOutput = '';
+                        for (const name in gitState.remotes) {
+                            remoteOutput += `${name}\t${gitState.remotes[name]} (fetch)\n`;
+                            remoteOutput += `${name}\t${gitState.remotes[name]} (push)\n`;
+                        }
+                        return remoteOutput.trim() || 'No remotes configured.';
+                    }
+                    throw new Error('Unsupported remote command.');
+
+                case 'fetch':
+                    // Simplified fetch
+                    return 'Simulating fetch... Remote branches are now up-to-date.';
+
+                case 'tag':
+                    const tagName = parts[2];
+                    if (!tagName) {
+                        return Object.keys(gitState.tags).join('\n') || 'No tags found.';
+                    }
+                    const head = gitState.commits[gitState.commits.length - 1];
+                    gitState.tags[tagName] = head.id;
+                    return `Created tag '${tagName}'`;
+
+                case 'reflog':
+                    return gitState.reflog.join('\n') || 'Reflog is empty.';
 
                 case 'status':
                     let status = `On branch ${gitState.currentBranch}\n`;
@@ -793,8 +1017,41 @@ git config pack.windowMemory 100m</pre>
                     }
                     return status;
 
+                case 'log':
+                    const oneline = parts.includes('--oneline');
+                    let logOutput = '';
+                    const reversedCommits = [...gitState.commits].reverse();
+                    reversedCommits.forEach(commit => {
+                        if (oneline) {
+                            logOutput += `<span class="commit-id">${commit.id}</span> (${commit.branch}) ${commit.message}\n`;
+                        } else {
+                            logOutput += `commit <span class="commit-id">${commit.id}</span>\n`;
+                            logOutput += `Author: ${commit.author}\n`;
+                            logOutput += `Date:   ${commit.date}\n\n`;
+                            logOutput += `    ${commit.message}\n\n`;
+                        }
+                    });
+                    return logOutput.trim();
+
+                case 'show':
+                    const commitToShow = parts[2];
+                    if (!commitToShow) {
+                        throw new Error('Please specify a commit hash to show.');
+                    }
+                    const foundCommit = gitState.commits.find(c => c.id.startsWith(commitToShow));
+                    if (!foundCommit) {
+                        throw new Error(`Commit '${commitToShow}' not found.`);
+                    }
+                    let showOutput = `commit <span class="commit-id">${foundCommit.id}</span>\n`;
+                    showOutput += `Author: ${foundCommit.author}\n`;
+                    showOutput += `Date:   ${foundCommit.date}\n\n`;
+                    showOutput += `    ${foundCommit.message}\n\n`;
+                    showOutput += `diff --git a/file1.js b/file1.js\n<span class="staged">--- a/file1.js\n+++ b/file1.js\n@@ -0,0 +1 @@\n+console.log("hello world");</span>\n`;
+                    return showOutput;
+
                 default:
-                    throw new Error(`'${subCmd}' is not a recognized git command in this simulator`);
+                    const availableCmds = ['init', 'add', 'commit', 'branch', 'checkout', 'status', 'merge', 'log', 'show', 'remote', 'fetch', 'tag', 'reflog', 'reset', 'rm'].join(', ');
+                    throw new Error(`'${subCmd}' is not a recognized command. Available commands: ${availableCmds}`);
             }
         }
 
@@ -831,6 +1088,13 @@ git config pack.windowMemory 100m</pre>
                 }
             });
 
+            if (Object.keys(gitState.tags).length > 0) {
+                viz += '\n<strong>Tags:</strong>\n';
+                for (const tagName in gitState.tags) {
+                    viz += `🏷️ ${tagName} -> ${gitState.tags[tagName].substring(0,7)}\n`;
+                }
+            }
+
 
             graph.innerHTML = viz;
         }
@@ -843,8 +1107,9 @@ git config pack.windowMemory 100m</pre>
                 commits: [],
                 staged: [],
                 unstaged: [],
-                tags: [],
-                remotes: []
+                tags: {},
+                remotes: {},
+                reflog: []
             };
             document.getElementById('commandOutput').innerHTML = 'Repository reset. Ready to execute Git commands...';
             updateVisualization();
@@ -1069,6 +1334,23 @@ git config pack.windowMemory 100m</pre>
                     }
                 });
             }
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keyup', function() {
+                const filter = searchInput.value.toLowerCase();
+                const cards = document.querySelectorAll('.scenario-card');
+                cards.forEach(card => {
+                    const title = card.querySelector('.scenario-title').textContent.toLowerCase();
+                    const description = card.querySelector('.scenario-description')?.textContent.toLowerCase() || '';
+                    const code = card.querySelector('pre')?.textContent.toLowerCase() || '';
+                    if (title.includes(filter) || description.includes(filter) || code.includes(filter)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
         });
     </script>
 </body>
