@@ -4,307 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Git Commands for Real-World Scenarios</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --text-primary: #e6edf3;
-            --text-secondary: #7d8590;
-            --accent: #58a6ff;
-            --accent-hover: #1f6feb;
-            --border: #30363d;
-            --code-bg: #0d1117;
-            --success: #238636;
-            --warning: #d29922;
-            --danger: #da3633;
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, var(--accent), #f78166);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .scenario-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .scenario-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-            border-color: var(--accent);
-        }
-
-        .scenario-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .scenario-icon {
-            font-size: 1.5rem;
-            margin-right: 0.5rem;
-        }
-
-        .scenario-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .scenario-description {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .code-block {
-            background: var(--code-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .code-block pre {
-            color: var(--text-primary);
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-            font-size: 0.85rem;
-            line-height: 1.4;
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-
-        .code-comment {
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        .copy-button {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .copy-button:hover {
-            background: var(--accent);
-            color: var(--text-primary);
-        }
-
-        .problem-box {
-            background: rgba(218, 54, 51, 0.1);
-            border: 1px solid var(--danger);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 0.5rem 0;
-        }
-
-        .problem-title {
-            color: var(--danger);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .solution-box {
-            background: rgba(35, 134, 54, 0.1);
-            border: 1px solid var(--success);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 0.5rem 0;
-        }
-
-        .solution-title {
-            color: var(--success);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .tip-box {
-            background: rgba(210, 153, 34, 0.1);
-            border: 1px solid var(--warning);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-
-        .tip-title {
-            color: var(--warning);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-tabs {
-            display: flex;
-            margin-bottom: 2rem;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 0.25rem;
-            overflow-x: auto;
-        }
-
-        .nav-tab {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            font-size: 0.9rem;
-        }
-
-        .nav-tab:hover {
-            color: var(--text-primary);
-            background: var(--bg-tertiary);
-        }
-
-        .nav-tab.active {
-            background: var(--accent);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            color: var(--text-secondary);
-            border-top: 1px solid var(--border);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .scenario-card {
-                padding: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .container {
-                padding: 0.5rem;
-            }
-
-            .nav-tabs {
-                flex-wrap: wrap;
-            }
-
-            .copy-button {
-                padding: 0.2rem 0.4rem;
-                font-size: 0.7rem;
-            }
-        }
-
-        .search-container {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.2s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
-        }
-
-        .search-input::placeholder {
-            color: var(--text-secondary);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -313,18 +13,31 @@
             <p class="subtitle">Production-ready Git workflows for engineering teams</p>
         </header>
 
+        <div class="interactive-tools">
+            <button class="tool-button" onclick="openSimulator()">
+                <span class="tool-icon">🎮</span>
+                <span class="tool-title">Command Simulator</span>
+                <span class="tool-desc">Practice Git commands in a safe sandbox</span>
+            </button>
+            <button class="tool-button" onclick="openDecisionTree()">
+                <span class="tool-icon">🌳</span>
+                <span class="tool-title">Decision Tree</span>
+                <span class="tool-desc">Find the right command for your situation</span>
+            </button>
+        </div>
+
         <div class="search-container">
             <input type="text" class="search-input" id="searchInput" placeholder="Search scenarios... (e.g., 'merge conflict', 'undo commit', 'branch')">
         </div>
 
         <div class="nav-tabs">
-            <button class="nav-tab active" onclick="showTab('basics')">Diagnostics & Setup</button>
-            <button class="nav-tab" onclick="showTab('workflows')">Workflows</button>
-            <button class="nav-tab" onclick="showTab('troubleshooting')">Troubleshooting</button>
-            <button class="nav-tab" onclick="showTab('advanced')">Advanced</button>
+            <button class="nav-tab" onclick="showTab(event, 'basics')">Diagnostics & Setup</button>
+            <button class="nav-tab" onclick="showTab(event, 'workflows')">Workflows</button>
+            <button class="nav-tab" onclick="showTab(event, 'troubleshooting')">Troubleshooting</button>
+            <button class="nav-tab" onclick="showTab(event, 'advanced')">Advanced</button>
         </div>
 
-        <div id="basics" class="tab-content active">
+        <div id="basics" class="tab-content">
             <div class="grid">
                 <div class="scenario-card">
                     <div class="scenario-header">
@@ -866,13 +579,442 @@ git config pack.windowMemory 100m</pre>
             </div>
         </div>
 
+    <!-- Command Simulator Modal -->
+    <div id="simulatorModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('simulatorModal')">&times;</span>
+            <h2>Git Command Simulator</h2>
+            <p>Practice commands safely. Your real repository will not be affected.</p>
+            <div class="simulator-ui">
+                <div id="gitGraph" class="git-graph">Initialize a repository with 'git init' to begin...</div>
+                <div id="commandOutput" class="command-output">Ready to execute Git commands...</div>
+                <div class="command-input-wrapper">
+                    <span class="prompt">$</span>
+                    <input type="text" id="commandInput" placeholder="e.g., git commit -m 'My first commit'">
+                    <button onclick="executeCommand()">Execute</button>
+                </div>
+            </div>
+            <button onclick="resetSimulator()">Reset Simulator</button>
+        </div>
+    </div>
+
+    <!-- Decision Tree Modal -->
+    <div id="decisionTreeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('decisionTreeModal')">&times;</span>
+            <h2>Decision Tree Assistant</h2>
+            <p>Find the right command by answering a few questions.</p>
+            <div id="decisionTreeContainer">
+                <!-- Decision tree will be rendered here by JS -->
+            </div>
+        </div>
+    </div>
+
         <footer>
             <p>Built for production environments. Save this reference and never get stuck with Git again.</p>
         </footer>
     </div>
 
     <script>
-        function showTab(tabName) {
+        // Modal functionality
+        function openSimulator() {
+            document.getElementById('simulatorModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openDecisionTree() {
+            document.getElementById('decisionTreeModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            resetDecisionTree();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const simulatorModal = document.getElementById('simulatorModal');
+            const decisionModal = document.getElementById('decisionTreeModal');
+            if (event.target === simulatorModal) {
+                closeModal('simulatorModal');
+            }
+            if (event.target === decisionModal) {
+                closeModal('decisionTreeModal');
+            }
+        }
+
+        // Command Simulator Logic
+        let gitState = {
+            initialized: false,
+            currentBranch: 'main',
+            branches: [],
+            commits: [],
+            staged: [],
+            unstaged: [],
+            tags: [],
+            remotes: []
+        };
+
+        function executeCommand() {
+            const input = document.getElementById('commandInput');
+            const command = input.value.trim();
+            const output = document.getElementById('commandOutput');
+
+            if (!command) return;
+
+            output.innerHTML += `\n<span class="prompt">$ ${input.value}</span>`;
+            
+            try {
+                const result = processGitCommand(command);
+                output.innerHTML += `\n${result}`;
+                updateVisualization();
+            } catch (error) {
+                output.innerHTML += `\n<span class="error">❌ Error: ${error.message}</span>`;
+            }
+
+            output.scrollTop = output.scrollHeight;
+            input.value = '';
+        }
+
+        function processGitCommand(command) {
+            const parts = command.split(' ');
+            const gitCmd = parts[0];
+
+            if (gitCmd !== 'git') {
+                throw new Error('Commands must start with "git"');
+            }
+            
+            const subCmd = parts[1];
+
+            if (!gitState.initialized && subCmd !== 'init') {
+                throw new Error('Not a git repository. Please run "git init" first.');
+            }
+
+            switch (subCmd) {
+                case 'init':
+                    if (gitState.initialized) {
+                        return 'Repository already initialized';
+                    }
+                    gitState.initialized = true;
+                    gitState.currentBranch = 'main';
+                    gitState.branches = ['main'];
+                    gitState.commits = [{ id: 'abc1234', message: 'Initial commit', branch: 'main' }];
+                    return 'Initialized empty Git repository in /simulator/project';
+
+                case 'checkout':
+                    if (parts[2] === '-b' && parts[3]) {
+                        const newBranch = parts[3];
+                        if (gitState.branches.includes(newBranch)) {
+                            throw new Error(`Branch '${newBranch}' already exists`);
+                        }
+                        gitState.branches.push(newBranch);
+                        gitState.currentBranch = newBranch;
+                        return `Switched to a new branch '${newBranch}'`;
+                    } else if (parts[2] && gitState.branches.includes(parts[2])) {
+                        gitState.currentBranch = parts[2];
+                        return `Switched to branch '${parts[2]}'`;
+                    } else if (parts[2]) {
+                        throw new Error(`Branch '${parts[2]}' does not exist`);
+                    } else {
+                        throw new Error('Invalid checkout command');
+                    }
+
+                case 'add':
+                    if (parts[2] === '.') {
+                        gitState.staged = ['file1.js', 'file2.css', 'README.md'];
+                        return 'Added 3 files to staging area';
+                    } else if (parts[2]) {
+                        if (!gitState.staged.includes(parts[2])) {
+                           gitState.staged.push(parts[2]);
+                        }
+                        return `Added ${parts[2]} to staging area`;
+                    }
+                    throw new Error('Specify a file to add or use "." for all files.');
+
+                case 'commit':
+                    if (gitState.staged.length === 0) {
+                        return 'On branch ' + gitState.currentBranch + '\n' + 'nothing to commit, working tree clean';
+                    }
+                    const commitId = Math.random().toString(36).substr(2, 7);
+                    const msgIndex = command.indexOf('-m');
+                    const message = msgIndex !== -1 ? command.substring(msgIndex + 2).replace(/["\']/g, '').trim() : 'Commit message';
+                    
+                    gitState.commits.push({
+                        id: commitId,
+                        message,
+                        branch: gitState.currentBranch,
+                        parent: gitState.commits.find(c => c.branch === gitState.currentBranch)?.id || null
+                    });
+                    gitState.staged = [];
+                    return `[${gitState.currentBranch} ${commitId}] ${message}`;
+
+                case 'merge':
+                    const mergeBranch = parts[2];
+                    if (!mergeBranch || !gitState.branches.includes(mergeBranch)) {
+                        throw new Error(`Branch '${mergeBranch}' does not exist`);
+                    }
+                    if (mergeBranch === gitState.currentBranch) {
+                        throw new Error('Already on \'' + mergeBranch + '\'');
+                    }
+                    const mergeId = Math.random().toString(36).substr(2, 7);
+                    gitState.commits.push({
+                        id: mergeId,
+                        message: `Merge branch '${mergeBranch}' into ${gitState.currentBranch}`,
+                        branch: gitState.currentBranch,
+                        type: 'merge'
+                    });
+                    return `Merged branch '${mergeBranch}' into '${gitState.currentBranch}'`;
+
+                case 'branch':
+                     if (parts[2]) {
+                        const newBranch = parts[2];
+                        if (gitState.branches.includes(newBranch)) {
+                            throw new Error(`Branch '${newBranch}' already exists`);
+                        }
+                        gitState.branches.push(newBranch);
+                        return `Created branch '${newBranch}'`;
+                    } else {
+                        return gitState.branches.map(b => 
+                            b === gitState.currentBranch ? `* ${b}` : `  ${b}`
+                        ).join('\n');
+                    }
+
+                case 'status':
+                    let status = `On branch ${gitState.currentBranch}\n`;
+                    if (gitState.staged.length > 0) {
+                        status += 'Changes to be committed:\n';
+                        gitState.staged.forEach(file => {
+                            status += `  <span class="staged">(new file)  ${file}</span>\n`;
+                        });
+                    } else {
+                        status += 'nothing to commit, working tree clean';
+                    }
+                    return status;
+
+                default:
+                    throw new Error(`'${subCmd}' is not a recognized git command in this simulator`);
+            }
+        }
+
+        function updateVisualization() {
+            const graph = document.getElementById('gitGraph');
+            
+            if (!gitState.initialized) {
+                graph.innerHTML = '<span class="placeholder">Initialize a repository with \'git init\' to begin...</span>';
+                return;
+            }
+
+            let viz = `<strong>Branches:</strong>\n`;
+            gitState.branches.forEach(branch => {
+                const indicator = branch === gitState.currentBranch ? '* ' : '  ';
+                viz += `<span class="branch ${branch === gitState.currentBranch ? 'active' : ''}">${indicator}${branch}</span>\n`;
+            });
+
+            viz += '\n<strong>Commit History (main):</strong>\n';
+            const mainCommits = gitState.commits.filter(c => c.branch === 'main').slice(-4).reverse();
+            mainCommits.forEach((commit, index) => {
+                viz += `● <span class="commit-id">${commit.id}</span> - ${commit.message}\n`;
+                if (index < mainCommits.length - 1) viz += '│\n';
+            });
+            
+            const otherBranches = gitState.branches.filter(b => b !== 'main');
+            otherBranches.forEach(branch => {
+                const branchCommits = gitState.commits.filter(c => c.branch === branch).slice(-2).reverse();
+                if (branchCommits.length > 0) {
+                    viz += `\n<strong>History (${branch}):</strong>\n`;
+                    branchCommits.forEach((commit, index) => {
+                         viz += `● <span class="commit-id">${commit.id}</span> - ${commit.message}\n`;
+                         if (index < branchCommits.length - 1) viz += '│\n';
+                    });
+                }
+            });
+
+
+            graph.innerHTML = viz;
+        }
+
+        function resetSimulator() {
+            gitState = {
+                initialized: false,
+                currentBranch: 'main',
+                branches: [],
+                commits: [],
+                staged: [],
+                unstaged: [],
+                tags: [],
+                remotes: []
+            };
+            document.getElementById('commandOutput').innerHTML = 'Repository reset. Ready to execute Git commands...';
+            updateVisualization();
+            document.getElementById('gitGraph').innerHTML = '<span class="placeholder">Initialize a repository with \'git init\' to begin...</span>';
+        }
+
+        // Decision Tree Logic
+        const decisionTree = {
+            'start': {
+                question: 'What do you need help with?',
+                options: {
+                    'undo': {
+                        title: 'Undo something',
+                        question: 'What do you want to undo?',
+                        options: {
+                            'last-commit': {
+                                title: 'Last Commit',
+                                result: {
+                                    title: 'Undo Last Commit',
+                                    commands: [
+                                        'git reset --soft HEAD~1  # Keep changes staged',
+                                        'git reset HEAD~1         # Keep changes unstaged',
+                                        'git reset --hard HEAD~1  # Discard changes (DANGEROUS)'
+                                    ],
+                                    explanation: 'Use --soft to keep changes, --hard to completely remove them.'
+                                }
+                            },
+                            'staging': {
+                                title: 'Staged Changes',
+                                result: {
+                                    title: 'Unstage Files',
+                                    commands: [
+                                        'git reset HEAD filename    # Unstage specific file',
+                                        'git reset HEAD .          # Unstage all files'
+                                    ],
+                                    explanation: 'Removes files from staging area but keeps changes in working directory.'
+                                }
+                            }
+                        }
+                    },
+                    'collaborate': {
+                        title: 'Collaborate with others',
+                        question: 'What collaboration task?',
+                        options: {
+                            'pull-request': {
+                                title: 'Create Pull Request',
+                                result: {
+                                    title: 'Pull Request Workflow',
+                                    commands: [
+                                        'git checkout -b feature/my-feature',
+                                        'git add . && git commit -m "feat: add new feature"',
+                                        'git push -u origin feature/my-feature',
+                                        '# Create PR in GitHub/GitLab interface'
+                                    ],
+                                    explanation: 'Follow feature branch workflow for collaborative development.'
+                                }
+                            },
+                            'merge-conflict': {
+                                title: 'Resolve Merge Conflict',
+                                result: {
+                                    title: 'Merge Conflict Resolution',
+                                    commands: [
+                                        'git status                  # See conflicted files',
+                                        '# Edit files to resolve conflicts',
+                                        'git add <resolved-file>',
+                                        'git commit',
+                                        'git merge --abort          # If you want to cancel'
+                                    ],
+                                    explanation: 'Look for <<<<<<< ======= >>>>>>> markers in conflicted files.'
+                                }
+                            }
+                        }
+                    },
+                    'emergency': {
+                        title: 'Fix an emergency',
+                        question: 'What\'s the emergency?',
+                        options: {
+                            'pushed-secrets': {
+                                title: 'Pushed Secrets/Passwords',
+                                result: {
+                                    title: '🚨 CRITICAL: Secrets in Repository',
+                                    commands: [
+                                        '# STEP 1: IMMEDIATELY rotate all exposed secrets!',
+                                        'git filter-repo --path config/secrets.json --invert-paths',
+                                        'git push --force-with-lease origin main',
+                                        '# STEP 2: Everyone must re-clone the repository'
+                                    ],
+                                    explanation: 'Rotate secrets FIRST, then clean Git history. Coordinate with your team before force pushing.'
+                                }
+                            },
+                            'lost-commits': {
+                                title: 'Lost Important Commits',
+                                result: {
+                                    title: 'Recover Lost Commits',
+                                    commands: [
+                                        'git reflog --all           # Find lost commits',
+                                        'git checkout <commit-hash> # Restore specific commit',
+                                        'git checkout -b recovery-branch',
+                                        'git cherry-pick <commit-hash>'
+                                    ],
+                                    explanation: 'Git rarely loses data permanently. Check reflog for recent activity.'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        function resetDecisionTree() {
+            renderDecisionStep(decisionTree['start']);
+        }
+
+        function renderDecisionStep(step) {
+            const container = document.getElementById('decisionTreeContainer');
+            container.innerHTML = ''; // Clear previous content
+
+            if (!step) {
+                container.innerHTML = '<p class="error">Something went wrong. Please reset.</p>';
+                const resetButton = document.createElement('button');
+                resetButton.textContent = 'Start Over';
+                resetButton.onclick = resetDecisionTree;
+                container.appendChild(resetButton);
+                return;
+            }
+
+            const title = document.createElement('h3');
+            title.textContent = step.question || step.title;
+            container.appendChild(title);
+
+            if (step.options) {
+                const optionsList = document.createElement('div');
+                optionsList.className = 'decision-options';
+                for (const key in step.options) {
+                    const option = step.options[key];
+                    const button = document.createElement('button');
+                    button.textContent = option.title;
+                    button.onclick = () => renderDecisionStep(option);
+                    optionsList.appendChild(button);
+                }
+                container.appendChild(optionsList);
+            } else if (step.result) {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'decision-result';
+                
+                const resultTitle = document.createElement('h4');
+                resultTitle.textContent = step.result.title;
+                resultDiv.appendChild(resultTitle);
+
+                const explanation = document.createElement('p');
+                explanation.textContent = step.result.explanation;
+                resultDiv.appendChild(explanation);
+
+                const codeBlock = document.createElement('div');
+                codeBlock.className = 'code-block';
+                const pre = document.createElement('pre');
+                pre.textContent = step.result.commands.join('\n');
+                codeBlock.appendChild(pre);
+                resultDiv.appendChild(codeBlock);
+
+                container.appendChild(resultDiv);
+            }
+            
+            const resetButton = document.createElement('button');
+            resetButton.textContent = 'Start Over';
+            resetButton.onclick = resetDecisionTree;
+            container.appendChild(resetButton);
+        }
+
+        function showTab(evt, tabName) {
             // Hide all tab contents
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => {
@@ -889,7 +1031,12 @@ git config pack.windowMemory 100m</pre>
             document.getElementById(tabName).classList.add('active');
 
             // Add active class to clicked tab
-            event.target.classList.add('active');
+            if (evt) {
+                evt.currentTarget.classList.add('active');
+            } else {
+                // Fallback for initial load
+                document.querySelector(`.nav-tab[onclick*="'${tabName}'"]`).classList.add('active');
+            }
         }
 
         function copyCode(button) {
@@ -908,28 +1055,20 @@ git config pack.windowMemory 100m</pre>
             });
         }
 
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.scenario-card');
-            
-            cards.forEach(card => {
-                const title = card.querySelector('.scenario-title').textContent.toLowerCase();
-                const description = card.querySelector('.scenario-description').textContent.toLowerCase();
-                const code = card.querySelector('pre') ? card.querySelector('pre').textContent.toLowerCase() : '';
-                
-                if (title.includes(searchTerm) || description.includes(searchTerm) || code.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
         // Add smooth scrolling for internal links
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize with first tab
-            showTab('basics');
+            showTab(null, 'basics');
+
+            // Add keypress listener for simulator
+            const commandInput = document.getElementById('commandInput');
+            if (commandInput) {
+                commandInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        executeCommand();
+                    }
+                });
+            }
         });
     </script>
 </body>
