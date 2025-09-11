@@ -30,694 +30,309 @@
             <input type="text" class="search-input" id="searchInput" placeholder="Search scenarios... (e.g., 'merge conflict', 'undo commit', 'branch')">
         </div>
 
-        <div class="nav-tabs">
-            <button class="nav-tab" onclick="showTab(event, 'basics')">Diagnostics & Setup</button>
-            <button class="nav-tab" onclick="showTab(event, 'workflows')">Workflows</button>
-            <button class="nav-tab" onclick="showTab(event, 'troubleshooting')">Troubleshooting</button>
-            <button class="nav-tab" onclick="showTab(event, 'advanced')">Advanced</button>
-            <button class="nav-tab" onclick="showTab(event, 'shell')">Basic Shell Commands</button>
-            <button class="nav-tab" onclick="showTab(event, 'docker')">Docker Commands</button>
-            <button class="nav-tab" onclick="showTab(event, 'deleting')">⚠️ Deleting & Destroying</button>
-        </div>
-
-        <div id="shell" class="tab-content">
-            <div class="grid">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">⚙️</span>
-                        <h3 class="scenario-title">File System Navigation</h3>
-                    </div>
-                    <p class="scenario-description">Basic commands for navigating the file system.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># List files and directories
-ls -la
-
-# Change directory
-cd /path/to/directory
-
-# Print working directory
-pwd</pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="docker" class="tab-content">
-            <div class="grid">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🐳</span>
-                        <h3 class="scenario-title">Container Management</h3>
-                    </div>
-                    <p class="scenario-description">Basic commands for managing Docker containers.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># List running containers
-docker ps
-
-# List all containers
-docker ps -a
-
-# Stop a container
-docker stop <container_id>
-
-# Remove a container
-docker rm <container_id></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="basics" class="tab-content">
-            <div class="grid">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">⚙️</span>
-                        <h3 class="scenario-title">Initial Configuration</h3>
-                    </div>
-                    <p class="scenario-description">Configure your Git identity and settings. This is a one-time setup.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Set your name for all repositories
-git config --global user.name "Your Name"
-
-# Set your email for all repositories
-git config --global user.email "you@example.com"
-
-# View all global config settings
-git config --list
-
-# Get a specific config value
-git config --get user.name</pre>
-                    </div>
-                    <div class="tip-box">
-                        <div class="tip-title">💡 Pro Tip</div>
-                        The <code>--global</code> flag applies these settings to every repo on your system. Omit it to set config for the current repo only.
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🔍</span>
-                        <h3 class="scenario-title">Repository Diagnostics & Help</h3>
-                    </div>
-                    <p class="scenario-description">Commands to understand your current repository state and get help.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Show the current status of your repo
-git status
-
-# List all local and remote branches
-git branch -a
-
-# Show remote repository URLs
-git remote -v
-
-# Get help for a specific command
-git help commit</pre>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🌱</span>
-                        <h3 class="scenario-title">Creating a Repository</h3>
-                    </div>
-                    <p class="scenario-description">Initialize a new repository locally or clone an existing one.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Initialize a new repository in the current directory
-git init
-
-# --- OR --- 
-
-# Clone an existing repository from a URL
-# Note: clone is not supported in the simulator
-git clone https://github.com/user/repo.git
-
-# Clone only a specific branch
-git clone --branch main https://github.com/user/repo.git</pre>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🗑️</span>
-                        <h3 class="scenario-title">Ignore Files (.gitignore)</h3>
-                    </div>
-                    <p class="scenario-description">Prevent sensitive or generated files from being tracked.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Create .gitignore file
-touch .gitignore
-
-# Example patterns:
-node_modules/
-.env
-build/
-*.log</pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="workflows" class="tab-content">
-            <div class="grid">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🔀</span>
-                        <h3 class="scenario-title">Feature Branch Workflow</h3>
-                    </div>
-                    <p class="scenario-description">Standard workflow for feature development in teams.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Create and switch to feature branch
-git checkout -b feature/user-authentication
-
-# Make your changes, then commit
-git add .
-git commit -m "Add user authentication system"
-
-# Push feature branch
-git push -u origin feature/user-authentication
-
-# Switch back to main and merge
-git checkout main
-git merge feature/user-authentication</pre>
-                    </div>
-                     <div class="tip-box">
-                        <div class="tip-title">💡 Pro Tip</div>
-                        After merging, you can delete the branch. See the "Deleting & Destroying" tab for how to do this safely.
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🛟</span>
-                        <h3 class="scenario-title">Stashing Work</h3>
-                    </div>
-                    <p class="scenario-description">Temporarily save uncommitted changes.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Save current changes
-git stash
-
-# Save with a message
-git stash push -m "WIP: refactoring auth logic"
-
-# List stashes
-git stash list
-
-# Apply latest stash
-git stash pop
-
-# Apply specific stash
-git stash pop stash@{1}
-
-# Apply without removing from stash
-git stash apply
-
-# Delete stash
-git stash drop stash@{1}</pre>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">📌</span>
-                        <h3 class="scenario-title">Tagging Releases</h3>
-                    </div>
-                    <p class="scenario-description">Mark specific commits as release points.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Create lightweight tag
-git tag v1.0.0
-
-# Create annotated tag (recommended)
-git tag -a v1.0.0 -m "Release version 1.0.0"
-
-# Tag specific commit
-git tag -a v1.0.1 abc1234 -m "Hotfix release"
-
-# Push tags to remote
-git push origin --tags
-
-# List tags
-git tag -l</pre>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🕒</span>
-                        <h3 class="scenario-title">History & Inspection</h3>
-                    </div>
-                    <p class="scenario-description">Examine commit history and changes.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Compact history
-git log --oneline
-
-# Detailed history with stats
-git log --stat
-
-# Visual branch history
-git log --graph --pretty=format:'%h -%d %s (%cr) &lt;%an&gt;'
-
-# See who changed each line
-git blame filename
-
-# Show changes in specific commit
-git show abc1234
-
-# Compare branches
-git diff main..feature/login</pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="troubleshooting" class="tab-content">
-            <div class="grid">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">❌</span>
-                        <h3 class="scenario-title">Wrong Git Root</h3>
-                    </div>
-                    
-                    <div class="problem-box">
-                        <div class="problem-title">Problem:</div>
-                        You ran <code>git init</code> in the wrong directory and Git is tracking too many files.
-                    </div>
-
-                    <div class="solution-box">
-                        <div class="solution-title">Solution:</div>
-                        <div class="code-block">
-                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                            <pre># Navigate to wrong directory
-cd ~/Documents
-
-# Check if Git repo exists
-ls -a
-
-# Remove the wrong Git repo
-rm -rf .git
-
-# Navigate to correct project folder
-cd ~/Documents/my-project
-
-# Initialize Git in correct location
-git init
-git add .
-git commit -m "Initial commit"</pre>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🔄</span>
-                        <h3 class="scenario-title">Wrong Remote URL</h3>
-                    </div>
-                    
-                    <div class="problem-box">
-                        <div class="problem-title">Problem:</div>
-                        You pushed to the wrong repository or need to change remote URL.
-                    </div>
-
-                    <div class="solution-box">
-                        <div class="solution-title">Solution:</div>
-                        <div class="code-block">
-                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                            <pre># Check current remote
-git remote -v
-
-# Remove current remote
-git remote remove origin
-
-# Add correct remote
-git remote add origin https://github.com/username/correct-repo.git
-
-# Push to correct repository
-git push -u origin main</pre>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">⚠️</span>
-                        <h3 class="scenario-title">Merge Conflicts</h3>
-                    </div>
-                    
-                    <div class="problem-box">
-                        <div class="problem-title">Problem:</div>
-                        Git can't automatically merge changes from different branches.
-                    </div>
-
-                    <div class="solution-box">
-                        <div class="solution-title">Solution:</div>
-                        <div class="code-block">
-                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                            <pre># When merge conflict occurs
-git status                    # See conflicted files
-
-# Edit conflicted files manually
-# Look for markers: &lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, &gt;&gt;&gt;&gt;&gt;&gt;&gt;
-# Choose which changes to keep
-
-# After resolving conflicts
-git add &lt;resolved-file&gt;
-git commit
-
-# Abort merge if needed
-git merge --abort</pre>
-                        </div>
-                    </div>
-
-                    <div class="tip-box">
-                        <div class="tip-title">💡 Pro Tip</div>
-                        Use VS Code's built-in merge conflict resolver or tools like GitKraken for visual conflict resolution.
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">⏪</span>
-                        <h3 class="scenario-title">Undoing Commits</h3>
-                    </div>
-                    <p class="scenario-description">Various ways to undo changes depending on your situation.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Unstage file (keep changes)
-git reset HEAD filename
-
-# Undo last commit, keep changes staged
-git reset --soft HEAD~1
-
-# Undo last commit, keep changes unstaged
-git reset HEAD~1
-
-# Create new commit that undoes previous commit
-git revert abc1234</pre>
-                    </div>
-
-                    <div class="tip-box">
-                        <div class="tip-title">⚠️ Warning</div>
-                        To permanently discard changes, see the "Discard Local Changes" card in the "Deleting & Destroying" tab.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="advanced" class="tab-content">
-            <div class="grid">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🔧</span>
-                        <h3 class="scenario-title">Interactive Rebase</h3>
-                    </div>
-                    <p class="scenario-description">Rewrite commit history for cleaner project timeline.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Rebase last 3 commits interactively
-git rebase -i HEAD~3
-
-# Common rebase commands in editor:
-# pick = use commit
-# reword = edit commit message
-# edit = stop to modify commit
-# squash = combine with previous commit
-# fixup = like squash but discard message
-# drop = remove commit
-
-# Force push after rebase (be careful!)
-git push --force-with-lease</pre>
-                    </div>
-
-                    <div class="tip-box">
-                        <div class="tip-title">⚠️ Warning</div>
-                        Never rebase commits that have been pushed to shared branches. Only rebase private feature branches.
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🍒</span>
-                        <h3 class="scenario-title">Cherry-picking</h3>
-                    </div>
-                    <p class="scenario-description">Apply specific commits to another branch.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Apply specific commit to current branch
-git cherry-pick abc1234
-
-# Apply multiple commits
-git cherry-pick abc1234 def5678
-
-# Apply commit range
-git cherry-pick abc1234..def5678
-
-# Cherry-pick without committing (for review)
-git cherry-pick --no-commit abc1234</pre>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🔍</span>
-                        <h3 class="scenario-title">Advanced Search</h3>
-                    </div>
-                    <p class="scenario-description">Find commits, changes, and content across history.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Search for commits by message
-git log --grep="auth"
-
-# Search for commits by author
-git log --author="john@example.com"
-
-# Search for code changes
-git log -S "function login"
-
-# Search in commit diffs
-git log -G "regex-pattern"
-
-# Find when file was deleted
-git log --follow -- filename
-
-# Show commits that touched specific lines
-git blame -L 10,20 filename</pre>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🧹</span>
-                        <h3 class="scenario-title">Repository Cleanup</h3>
-                    </div>
-                    <p class="scenario-description">Maintain repository health and performance.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Garbage collect and optimize
-git gc
-
-# Remove remote tracking branches that no longer exist
-git remote prune origin
-
-# Show repository size
-du -sh .git
-
-# Compress repository
-git gc --aggressive</pre>
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🔐</span>
-                        <h3 class="scenario-title">Security & Secrets</h3>
-                    </div>
-                    <p class="scenario-description">Handle sensitive data and security concerns.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Check for secrets before committing
-git diff --cached | grep -i "password\|key\|secret"
-
-# Set up git hooks for secret scanning
-# (requires additional tooling like pre-commit hooks)</pre>
-                    </div>
-
-                    <div class="tip-box">
-                        <div class="tip-title">💡 Pro Tip</div>
-                        To remove secrets from history, see the "Deleting & Destroying" tab. Use tools like <code>git-secrets</code> or GitHub's secret scanning to prevent secrets from being committed.
-                    </div>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">⚡</span>
-                        <h3 class="scenario-title">Performance Optimization</h3>
-                    </div>
-                    <p class="scenario-description">Optimize Git performance for large repositories.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Enable parallel processing
-git config core.preloadindex true
-git config core.fscache true
-
-# Shallow clone for faster downloads
-git clone --depth 1 https://github.com/user/repo.git
-
-# Partial clone (Git 2.19+)
-git clone --filter=blob:none https://github.com/user/repo.git
-
-# Enable Git LFS for large files
-git lfs install
-git lfs track "*.zip"
-git add .gitattributes
-
-# Configure Git for better performance
-git config pack.threads 4
-git config pack.windowMemory 100m</pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="deleting" class="tab-content">
-            <div class="grid">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">❌</span>
-                        <h3 class="scenario-title">Delete Branches</h3>
-                    </div>
-                    <p class="scenario-description">Remove local and remote branches.</p>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Delete a local branch (safe)
-# Won't delete if it has unmerged changes
-git branch -d feature/old-feature
-
-# Delete a local branch (force)
-# Deletes branch even with unmerged changes
-git branch -D feature/old-feature
-
-# Delete a remote branch
-git push origin --delete feature/old-feature</pre>
-                    </div>
-                    <div class="tip-box">
-                        <div class="tip-title">💡 Pro Tip</div>
-                        Clean up merged branches regularly to keep your repository tidy.
-                    </div>
-                </div>
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🏷️</span>
-                        <h3 class="scenario-title">Delete Tags</h3>
-                    </div>
-                    <p class="scenario-description">Remove local and remote tags.</p>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Delete a local tag
-git tag -d v1.0.0
-
-# Delete a remote tag
-git push origin --delete v1.0.0</pre>
-                    </div>
-                </div>
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">📁</span>
-                        <h3 class="scenario-title">Remove Files & Untrack</h3>
-                    </div>
-                    <p class="scenario-description">Remove files from Git's tracking index.</p>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Stop tracking a file but keep it locally
-# (e.g., a config file that was accidentally committed)
-git rm --cached config.js
-
-# Remove a file from both Git and filesystem
-git rm file.log
-
-# Clean untracked files from working directory
-# -n: dry run (shows what would be deleted)
-git clean -n
-# -f: force (actually deletes the files)
-git clean -f
-# -fd: force delete files and directories
-git clean -fd</pre>
-                    </div>
-                </div>
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">🗑️</span>
-                        <h3 class="scenario-title">Discard Local Changes</h3>
-                    </div>
-                    <p class="scenario-description">Permanently throw away uncommitted changes.</p>
-                    <div class="problem-box">
-                        <div class="problem-title">DANGER ZONE:</div>
-                        These commands permanently destroy work. There is no undo.
-                    </div>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Discard changes in a specific file
-git checkout -- path/to/file.js
-
-# Discard all local changes in all files
-git reset --hard
-
-# Discard all local changes and remove all untracked files
-git reset --hard && git clean -fd</pre>
-                    </div>
-                </div>
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-icon">📜</span>
-                        <h3 class="scenario-title">Remove from History</h3>
-                    </div>
-                    <p class="scenario-description">Completely remove a file from the entire project history.</p>
-                     <div class="problem-box">
-                        <div class="problem-title">NUCLEAR OPTION:</div>
-                        This rewrites history. All collaborators will need to re-clone or perform a complex rebase. Use with extreme caution.
-                    </div>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Use the modern git-filter-repo tool
-# (Install first: pip install git-filter-repo)
-
-# Completely remove a file from all commits
-git filter-repo --path path/to/sensitive-file.txt --invert-paths
-
-# Remove a folder from all commits
-git filter-repo --path path/to/folder/ --invert-paths --force
-
-# Push the rewritten history
-# You MUST coordinate with your team before this step
-git push --force-with-lease</pre>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="guide-content">
+<h2>I. The Absolute Fundamentals (Zero)</h2>
+<p><em>These are the commands you'll use 90% of the time.</em></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>git init</code></td>
+      <td>Initialize a new Git repo in the current folder.</td>
+      <td><code>git init</code></td>
+    </tr>
+    <tr>
+      <td><code>git clone &lt;url&gt;</code></td>
+      <td>Download a remote repository to your machine.</td>
+      <td><code>git clone https://github.com/user/repo.git</code></td>
+    </tr>
+    <tr>
+      <td><code>git status</code></td>
+      <td><strong>Your best friend.</strong> Shows the state of your working directory and staging area.</td>
+      <td><code>git status</code></td>
+    </tr>
+    <tr>
+      <td><code>git add &lt;file&gt;</code></td>
+      <td>Stage a specific file for the next commit.</td>
+      <td><code>git add index.html</code></td>
+    </tr>
+    <tr>
+      <td><code>git add .</code></td>
+      <td>Stage <strong>all</strong> new and modified files for the next commit.</td>
+      <td><code>git add .</code></td>
+    </tr>
+    <tr>
+      <td><code>git commit -m "msg"</code></td>
+      <td>Take a snapshot of the staged changes with a descriptive message.</td>
+      <td><code>git commit -m "Add login button"</code></td>
+    </tr>
+    <tr>
+      <td><code>git push origin &lt;branch&gt;</code></td>
+      <td>Upload your local commits to a remote repository (like GitHub).</td>
+      <td><code>git push origin main</code></td>
+    </tr>
+    <tr>
+      <td><code>git pull origin &lt;branch&gt;</code></td>
+      <td>Download changes from the remote and merge them into your current branch.</td>
+      <td><code>git pull origin main</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>II. Branching & Context Switching (Novice)</h2>
+<p><em>Working on multiple features without messing up the main code.</em></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>git branch</code></td>
+      <td>List all local branches. The <code>*</code> shows your current branch.</td>
+      <td><code>git branch</code></td>
+    </tr>
+    <tr>
+      <td><code>git branch &lt;name&gt;</code></td>
+      <td>Create a new branch based on your current commit.</td>
+      <td><code>git branch new-feature</code></td>
+    </tr>
+    <tr>
+      <td><code>git checkout &lt;branch&gt;</code></td>
+      <td>Switch to an existing branch.</td>
+      <td><code>git checkout new-feature</code></td>
+    </tr>
+    <tr>
+      <td><code>git checkout -b &lt;name&gt;</code></td>
+      <td><strong>Create a new branch and switch to it immediately.</strong> (Very common)</td>
+      <td><code>git checkout -b fix-bug</code></td>
+    </tr>
+    <tr>
+      <td><code>git switch &lt;branch&gt;</code></td>
+      <td>Newer, clearer way to switch branches (Git 2.23+).</td>
+      <td><code>git switch main</code></td>
+    </tr>
+    <tr>
+      <td><code>git switch -c &lt;name&gt;</code></td>
+      <td>Newer way to create and switch to a branch.</td>
+      <td><code>git switch -c new-feature</code></td>
+    </tr>
+    <tr>
+      <td><code>git merge &lt;branch&gt;</code></td>
+      <td>Combine the specified branch's history into your current branch.</td>
+      <td><code>git switch main</code> <br> <code>git merge new-feature</code></td>
+    </tr>
+    <tr>
+      <td><code>git branch -d &lt;branch&gt;</code></td>
+      <td>Delete a branch that has been merged (safe delete).</td>
+      <td><code>git branch -d old-feature</code></td>
+    </tr>
+    <tr>
+      <td><code>git branch -D &lt;branch&gt;</code></td>
+      <td><strong>Force delete a branch,</strong> even if it hasn't been merged. (Be careful!)</td>
+      <td><code>git branch -D abandoned-experiment</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>III. Undoing Mistakes & Rewriting History (Apprentice)</h2>
+<p><em>The "oh crap" moments. Use these carefully.</em></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+      <th>When to Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>git restore &lt;file&gt;</code></td>
+      <td>Discard changes in your working directory for a specific file.</td>
+      <td>"I haven't <code>add</code>ed this file yet and I want to start over."</td>
+    </tr>
+    <tr>
+      <td><code>git restore --staged &lt;file&gt;</code></td>
+      <td>Unstage a file <strong>without</strong> losing the changes in your working directory.</td>
+      <td>"I <code>add</code>ed the wrong file by accident."</td>
+    </tr>
+    <tr>
+      <td><code>git commit --amend</code></td>
+      <td><strong>Edit the most recent commit.</strong> Change the message or add forgotten files.</td>
+      <td>"I just committed but forgot a file!" or "My commit message has a typo."</td>
+    </tr>
+    <tr>
+      <td><code>git reset --soft HEAD~1</code></td>
+      <td>Undo the last commit but <strong>keep all your changes as staged</strong>.</td>
+      <td>"I want to combine my last two commits."</td>
+    </tr>
+    <tr>
+      <td><code>git reset --hard HEAD~1</code></td>
+      <td><strong>Completely obliterate</strong> the last commit and all its changes. <strong>Warning: Unrecoverable.</strong></td>
+      <td>"That last commit was a huge mistake, I want to pretend it never happened."</td>
+    </tr>
+    <tr>
+      <td><code>git revert &lt;commit-hash&gt;</code></td>
+      <td>Create a <em>new commit</em> that undoes the changes of a previous commit. <strong>Safe for public history.</strong></td>
+      <td>"I need to undo a commit I already pushed to others."</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>IV. Advanced History Manipulation (Hero)</h2>
+<p><em>For a clean, professional commit history.</em></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>git rebase &lt;branch&gt;</code></td>
+      <td>Replay your current branch's commits on top of the latest version of <code>&lt;branch&gt;</code>.</td>
+      <td>"I want a clean, linear history for my feature branch before merging."</td>
+    </tr>
+    <tr>
+      <td><code>git rebase -i HEAD~3</code></td>
+      <td><strong>Interactive Rebase.</strong> Opens an editor to squash, edit, reorder, or drop commits.</td>
+      <td>"I have 5 messy 'WIP' commits I want to combine into one clean commit."</td>
+    </tr>
+    <tr>
+      <td><code>git cherry-pick &lt;commit&gt;</code></td>
+      <td>Apply the changes from a specific commit to your current branch.</td>
+      <td>"I need just that one bugfix from another branch, not the whole thing."</td>
+    </tr>
+    <tr>
+      <td><code>git stash</code></td>
+      <td>Temporarily shelves (stashes) all your uncommitted changes.</td>
+      <td>"My boss needs a fix NOW, but I'm in the middle of something."</td>
+    </tr>
+    <tr>
+      <td><code>git stash pop</code></td>
+      <td>Re-apply your most recently stashed changes and remove them from the stash.</td>
+      <td>"Okay, boss's fix is done, back to my feature."</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>V. Inspecting & Comparing (Detective)</h2>
+<p><em>Figuring out what happened and when.</em></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>git log</code></td>
+      <td>Show the commit history.</td>
+    </tr>
+    <tr>
+      <td><code>git log --oneline --graph --all</code></td>
+      <td>Fancy, compact history view with branch topology. <strong>Memorize this.</strong></td>
+    </tr>
+    <tr>
+      <td><code>git diff</code></td>
+      <td>Show unstaged changes since the last commit.</td>
+    </tr>
+    <tr>
+      <td><code>git diff --staged</code></td>
+      <td>Show staged changes (what you've <code>add</code>ed).</td>
+    </tr>
+    <tr>
+      <td><code>git blame &lt;file&gt;</code></td>
+      <td>Show who last modified each line of a file and in which commit.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>VI. Synchronizing with a Remote (Collaborator)</h2>
+<p><em>Working with others on GitHub/GitLab.</em></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>git fetch origin</code></td>
+      <td>Download all changes from the remote <strong>without</strong> merging them. "See what others have done."</td>
+    </tr>
+    <tr>
+      <td><code>git pull --rebase origin main</code></td>
+      <td><strong>Best practice pull.</strong> Fetches remote changes and rebases your commits on top of them. Cleaner than a merge.</td>
+    </tr>
+    <tr>
+      <td><code>git push origin --delete &lt;branch&gt;</code></td>
+      <td>Delete a branch on the remote (e.g., after merging a Pull Request).</td>
+    </tr>
+    <tr>
+      <td><code>git remote -v</code></td>
+      <td>Show the URLs of your connected remote repositories.</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Deleting a Remote Branch in Git</h3>
+<p>Deleting a remote branch is a common task when you've merged a feature branch and want to clean up. Here's how to do it:</p>
+<h4>The Command</h4>
+<div class="code-block"><pre><code>git push origin --delete branch-name</code></pre></div>
+<p>or the shorter equivalent:</p>
+<div class="code-block"><pre><code>git push origin :branch-name</code></pre></div>
+<h4>Step-by-Step Explanation</h4>
+<ol>
+  <li><strong>First, check what remote branches exist:</strong>
+    <div class="code-block"><pre><code>git branch -r</code></pre></div>
+  </li>
+  <li><strong>Delete the remote branch:</strong>
+    <div class="code-block"><pre><code># Example: delete a branch named "feature-login"
+git push origin --delete feature-login</code></pre></div>
+  </li>
+  <li><strong>Verify it's gone:</strong>
+    <div class="code-block"><pre><code>git branch -r  # Should no longer show the deleted branch</code></pre></div>
+  </li>
+</ol>
+<h4>Important Notes</h4>
+<ul>
+  <li><strong>You can't delete the default branch</strong> (usually <code>main</code> or <code>master</code>) unless you change the default first</li>
+  <li><strong>Other team members</strong> will need to run <code>git fetch --prune</code> to sync their local remote-tracking branches</li>
+  <li><strong>Deleting a remote branch doesn't delete local branches</strong> - you'll need to do that separately</li>
+</ul>
+<h4>Example Workflow</h4>
+<div class="code-block"><pre><code># List all remote branches
+git branch -r
+
+# Delete the remote feature-login branch
+git push origin --delete feature-login
+
+# Also delete the local branch if you're done with it
+git branch -d feature-login
+
+# Clean up remote-tracking references
+git fetch --prune</code></pre></div>
+<h4>What If You Get an Error?</h4>
+<p>If you see an error like <code>remote ref does not exist</code>, it means:
+<ol>
+  <li>The branch was already deleted, or</li>
+  <li>You typed the branch name incorrectly</li>
+</ol>
+<p>Always double-check with <code>git branch -r</code> first!</p>
+</div>
 
     <!-- Command Simulator Modal -->
     <div id="simulatorModal" class="modal">
