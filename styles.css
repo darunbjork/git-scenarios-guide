@@ -524,3 +524,36 @@ td code {
     font-size: 85%;
     border-radius: 6px;
 }
+
+.accordion-item {
+    border-bottom: 1px solid var(--border);
+}
+
+.accordion-header {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    padding: 1.5rem 1rem;
+    width: 100%;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-header:hover {
+    background: var(--bg-tertiary);
+}
+
+.accordion-icon {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.accordion-content {
+    display: none;
+    padding: 0 1rem 1.5rem;
+}

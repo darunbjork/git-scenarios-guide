@@ -31,290 +31,354 @@
         </div>
 
         <div class="guide-content">
-<h2>I. The Absolute Fundamentals (Zero)</h2>
-<p><em>These are the commands you'll use 90% of the time.</em></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Description</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>git init</code></td>
-      <td>Initialize a new Git repo in the current folder.</td>
-      <td><code>git init</code></td>
-    </tr>
-    <tr>
-      <td><code>git clone &lt;url&gt;</code></td>
-      <td>Download a remote repository to your machine.</td>
-      <td><code>git clone https://github.com/user/repo.git</code></td>
-    </tr>
-    <tr>
-      <td><code>git status</code></td>
-      <td><strong>Your best friend.</strong> Shows the state of your working directory and staging area.</td>
-      <td><code>git status</code></td>
-    </tr>
-    <tr>
-      <td><code>git add &lt;file&gt;</code></td>
-      <td>Stage a specific file for the next commit.</td>
-      <td><code>git add index.html</code></td>
-    </tr>
-    <tr>
-      <td><code>git add .</code></td>
-      <td>Stage <strong>all</strong> new and modified files for the next commit.</td>
-      <td><code>git add .</code></td>
-    </tr>
-    <tr>
-      <td><code>git commit -m "msg"</code></td>
-      <td>Take a snapshot of the staged changes with a descriptive message.</td>
-      <td><code>git commit -m "Add login button"</code></td>
-    </tr>
-    <tr>
-      <td><code>git push origin &lt;branch&gt;</code></td>
-      <td>Upload your local commits to a remote repository (like GitHub).</td>
-      <td><code>git push origin main</code></td>
-    </tr>
-    <tr>
-      <td><code>git pull origin &lt;branch&gt;</code></td>
-      <td>Download changes from the remote and merge them into your current branch.</td>
-      <td><code>git pull origin main</code></td>
-    </tr>
-  </tbody>
-</table>
+<div class="accordion-item">
+  <button class="accordion-header">
+    I. The Absolute Fundamentals (Zero)
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-content">
+    <p><em>These are the commands you'll use 90% of the time.</em></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>git init</code></td>
+          <td>Initialize a new Git repo in the current folder.</td>
+          <td><code>git init</code></td>
+        </tr>
+        <tr>
+          <td><code>git clone &lt;url&gt;</code></td>
+          <td>Download a remote repository to your machine.</td>
+          <td><code>git clone https://github.com/user/repo.git</code></td>
+        </tr>
+        <tr>
+          <td><code>git status</code></td>
+          <td><strong>Your best friend.</strong> Shows the state of your working directory and staging area.</td>
+          <td><code>git status</code></td>
+        </tr>
+        <tr>
+          <td><code>git add &lt;file&gt;</code></td>
+          <td>Stage a specific file for the next commit.</td>
+          <td><code>git add index.html</code></td>
+        </tr>
+        <tr>
+          <td><code>git add .</code></td>
+          <td>Stage <strong>all</strong> new and modified files for the next commit.</td>
+          <td><code>git add .</code></td>
+        </tr>
+        <tr>
+          <td><code>git commit -m "msg"</code></td>
+          <td>Take a snapshot of the staged changes with a descriptive message.</td>
+          <td><code>git commit -m "Add login button"</code></td>
+        </tr>
+        <tr>
+          <td><code>git push origin &lt;branch&gt;</code></td>
+          <td>Upload your local commits to a remote repository (like GitHub).</td>
+          <td><code>git push origin main</code></td>
+        </tr>
+        <tr>
+          <td><code>git pull origin &lt;branch&gt;</code></td>
+          <td>Download changes from the remote and merge them into your current branch.</td>
+          <td><code>git pull origin main</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<h2>II. Branching & Context Switching (Novice)</h2>
-<p><em>Working on multiple features without messing up the main code.</em></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Description</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>git branch</code></td>
-      <td>List all local branches. The <code>*</code> shows your current branch.</td>
-      <td><code>git branch</code></td>
-    </tr>
-    <tr>
-      <td><code>git branch &lt;name&gt;</code></td>
-      <td>Create a new branch based on your current commit.</td>
-      <td><code>git branch new-feature</code></td>
-    </tr>
-    <tr>
-      <td><code>git checkout &lt;branch&gt;</code></td>
-      <td>Switch to an existing branch.</td>
-      <td><code>git checkout new-feature</code></td>
-    </tr>
-    <tr>
-      <td><code>git checkout -b &lt;name&gt;</code></td>
-      <td><strong>Create a new branch and switch to it immediately.</strong> (Very common)</td>
-      <td><code>git checkout -b fix-bug</code></td>
-    </tr>
-    <tr>
-      <td><code>git switch &lt;branch&gt;</code></td>
-      <td>Newer, clearer way to switch branches (Git 2.23+).</td>
-      <td><code>git switch main</code></td>
-    </tr>
-    <tr>
-      <td><code>git switch -c &lt;name&gt;</code></td>
-      <td>Newer way to create and switch to a branch.</td>
-      <td><code>git switch -c new-feature</code></td>
-    </tr>
-    <tr>
-      <td><code>git merge &lt;branch&gt;</code></td>
-      <td>Combine the specified branch's history into your current branch.</td>
-      <td><code>git switch main</code> <br> <code>git merge new-feature</code></td>
-    </tr>
-    <tr>
-      <td><code>git branch -d &lt;branch&gt;</code></td>
-      <td>Delete a branch that has been merged (safe delete).</td>
-      <td><code>git branch -d old-feature</code></td>
-    </tr>
-    <tr>
-      <td><code>git branch -D &lt;branch&gt;</code></td>
-      <td><strong>Force delete a branch,</strong> even if it hasn't been merged. (Be careful!)</td>
-      <td><code>git branch -D abandoned-experiment</code></td>
-    </tr>
-  </tbody>
-</table>
+<div class="accordion-item">
+  <button class="accordion-header">
+    II. Branching & Context Switching (Novice)
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-content">
+    <p><em>Working on multiple features without messing up the main code.</em></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>git branch</code></td>
+          <td>List all local branches. The <code>*</code> shows your current branch.</td>
+          <td><code>git branch</code></td>
+        </tr>
+        <tr>
+          <td><code>git branch &lt;name&gt;</code></td>
+          <td>Create a new branch based on your current commit.</td>
+          <td><code>git branch new-feature</code></td>
+        </tr>
+        <tr>
+          <td><code>git checkout &lt;branch&gt;</code></td>
+          <td>Switch to an existing branch.</td>
+          <td><code>git checkout new-feature</code></td>
+        </tr>
+        <tr>
+          <td><code>git checkout -b &lt;name&gt;</code></td>
+          <td><strong>Create a new branch and switch to it immediately.</strong> (Very common)</td>
+          <td><code>git checkout -b fix-bug</code></td>
+        </tr>
+        <tr>
+          <td><code>git switch &lt;branch&gt;</code></td>
+          <td>Newer, clearer way to switch branches (Git 2.23+).</td>
+          <td><code>git switch main</code></td>
+        </tr>
+        <tr>
+          <td><code>git switch -c &lt;name&gt;</code></td>
+          <td>Newer way to create and switch to a branch.</td>
+          <td><code>git switch -c new-feature</code></td>
+        </tr>
+        <tr>
+          <td><code>git merge &lt;branch&gt;</code></td>
+          <td>Combine the specified branch's history into your current branch.</td>
+          <td><code>git switch main</code> <br> <code>git merge new-feature</code></td>
+        </tr>
+        <tr>
+          <td><code>git branch -d &lt;branch&gt;</code></td>
+          <td>Delete a branch that has been merged (safe delete).</td>
+          <td><code>git branch -d old-feature</code></td>
+        </tr>
+        <tr>
+          <td><code>git branch -D &lt;branch&gt;</code></td>
+          <td><strong>Force delete a branch,</strong> even if it hasn't been merged. (Be careful!)</td>
+          <td><code>git branch -D abandoned-experiment</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<h2>III. Undoing Mistakes & Rewriting History (Apprentice)</h2>
-<p><em>The "oh crap" moments. Use these carefully.</em></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Description</th>
-      <th>When to Use</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>git restore &lt;file&gt;</code></td>
-      <td>Discard changes in your working directory for a specific file.</td>
-      <td>"I haven't <code>add</code>ed this file yet and I want to start over."</td>
-    </tr>
-    <tr>
-      <td><code>git restore --staged &lt;file&gt;</code></td>
-      <td>Unstage a file <strong>without</strong> losing the changes in your working directory.</td>
-      <td>"I <code>add</code>ed the wrong file by accident."</td>
-    </tr>
-    <tr>
-      <td><code>git commit --amend</code></td>
-      <td><strong>Edit the most recent commit.</strong> Change the message or add forgotten files.</td>
-      <td>"I just committed but forgot a file!" or "My commit message has a typo."</td>
-    </tr>
-    <tr>
-      <td><code>git reset --soft HEAD~1</code></td>
-      <td>Undo the last commit but <strong>keep all your changes as staged</strong>.</td>
-      <td>"I want to combine my last two commits."</td>
-    </tr>
-    <tr>
-      <td><code>git reset --hard HEAD~1</code></td>
-      <td><strong>Completely obliterate</strong> the last commit and all its changes. <strong>Warning: Unrecoverable.</strong></td>
-      <td>"That last commit was a huge mistake, I want to pretend it never happened."</td>
-    </tr>
-    <tr>
-      <td><code>git revert &lt;commit-hash&gt;</code></td>
-      <td>Create a <em>new commit</em> that undoes the changes of a previous commit. <strong>Safe for public history.</strong></td>
-      <td>"I need to undo a commit I already pushed to others."</td>
-    </tr>
-  </tbody>
-</table>
+<div class="accordion-item">
+  <button class="accordion-header">
+    III. Undoing Mistakes & Rewriting History (Apprentice)
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-content">
+    <p><em>The "oh crap" moments. Use these carefully.</em></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>When to Use</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>git restore &lt;file&gt;</code></td>
+          <td>Discard changes in your working directory for a specific file.</td>
+          <td>"I haven't <code>add</code>ed this file yet and I want to start over."</td>
+          <td><code>git restore README.md</code></td>
+        </tr>
+        <tr>
+          <td><code>git restore --staged &lt;file&gt;</code></td>
+          <td>Unstage a file <strong>without</strong> losing the changes in your working directory.</td>
+          <td>"I <code>add</code>ed the wrong file by accident."</td>
+          <td><code>git restore --staged README.md</code></td>
+        </tr>
+        <tr>
+          <td><code>git commit --amend</code></td>
+          <td><strong>Edit the most recent commit.</strong> Change the message or add forgotten files.</td>
+          <td>"I just committed but forgot a file!" or "My commit message has a typo."</td>
+          <td><code>git commit --amend -m "A better commit message"</code></td>
+        </tr>
+        <tr>
+          <td><code>git reset --soft HEAD~1</code></td>
+          <td>Undo the last commit but <strong>keep all your changes as staged</strong>.</td>
+          <td>"I want to combine my last two commits."</td>
+          <td><code>git reset --soft HEAD~1</code></td>
+        </tr>
+        <tr>
+          <td><code>git reset --hard HEAD~1</code></td>
+          <td><strong>Completely obliterate</strong> the last commit and all its changes. <strong>Warning: Unrecoverable.</strong></td>
+          <td>"That last commit was a huge mistake, I want to pretend it never happened."</td>
+          <td><code>git reset --hard HEAD~1</code></td>
+        </tr>
+        <tr>
+          <td><code>git revert &lt;commit-hash&gt;</code></td>
+          <td>Create a <em>new commit</em> that undoes the changes of a previous commit. <strong>Safe for public history.</strong></td>
+          <td>"I need to undo a commit I already pushed to others."</td>
+          <td><code>git revert a1b2c3d4</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<h2>IV. Advanced History Manipulation (Hero)</h2>
-<p><em>For a clean, professional commit history.</em></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Description</th>
-      <th>Use Case</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>git rebase &lt;branch&gt;</code></td>
-      <td>Replay your current branch's commits on top of the latest version of <code>&lt;branch&gt;</code>.</td>
-      <td>"I want a clean, linear history for my feature branch before merging."</td>
-    </tr>
-    <tr>
-      <td><code>git rebase -i HEAD~3</code></td>
-      <td><strong>Interactive Rebase.</strong> Opens an editor to squash, edit, reorder, or drop commits.</td>
-      <td>"I have 5 messy 'WIP' commits I want to combine into one clean commit."</td>
-    </tr>
-    <tr>
-      <td><code>git cherry-pick &lt;commit&gt;</code></td>
-      <td>Apply the changes from a specific commit to your current branch.</td>
-      <td>"I need just that one bugfix from another branch, not the whole thing."</td>
-    </tr>
-    <tr>
-      <td><code>git stash</code></td>
-      <td>Temporarily shelves (stashes) all your uncommitted changes.</td>
-      <td>"My boss needs a fix NOW, but I'm in the middle of something."</td>
-    </tr>
-    <tr>
-      <td><code>git stash pop</code></td>
-      <td>Re-apply your most recently stashed changes and remove them from the stash.</td>
-      <td>"Okay, boss's fix is done, back to my feature."</td>
-    </tr>
-  </tbody>
-</table>
+<div class="accordion-item">
+  <button class="accordion-header">
+    IV. Advanced History Manipulation (Hero)
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-content">
+    <p><em>For a clean, professional commit history.</em></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Use Case</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>git rebase &lt;branch&gt;</code></td>
+          <td>Replay your current branch's commits on top of the latest version of <code>&lt;branch&gt;</code>.</td>
+          <td>"I want a clean, linear history for my feature branch before merging."</td>
+          <td><code>git rebase main</code></td>
+        </tr>
+        <tr>
+          <td><code>git rebase -i HEAD~3</code></td>
+          <td><strong>Interactive Rebase.</strong> Opens an editor to squash, edit, reorder, or drop commits.</td>
+          <td>"I have 5 messy 'WIP' commits I want to combine into one clean commit."</td>
+          <td><code>git rebase -i HEAD~3</code></td>
+        </tr>
+        <tr>
+          <td><code>git cherry-pick &lt;commit&gt;</code></td>
+          <td>Apply the changes from a specific commit to your current branch.</td>
+          <td>"I need just that one bugfix from another branch, not the whole thing."</td>
+          <td><code>git cherry-pick a1b2c3d4</code></td>
+        </tr>
+        <tr>
+          <td><code>git stash</code></td>
+          <td>Temporarily shelves (stashes) all your uncommitted changes.</td>
+          <td>"My boss needs a fix NOW, but I'm in the middle of something."</td>
+          <td><code>git stash</code></td>
+        </tr>
+        <tr>
+          <td><code>git stash pop</code></td>
+          <td>Re-apply your most recently stashed changes and remove them from the stash.</td>
+          <td>"Okay, boss's fix is done, back to my feature."</td>
+          <td><code>git stash pop</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<h2>V. Inspecting & Comparing (Detective)</h2>
-<p><em>Figuring out what happened and when.</em></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>git log</code></td>
-      <td>Show the commit history.</td>
-    </tr>
-    <tr>
-      <td><code>git log --oneline --graph --all</code></td>
-      <td>Fancy, compact history view with branch topology. <strong>Memorize this.</strong></td>
-    </tr>
-    <tr>
-      <td><code>git diff</code></td>
-      <td>Show unstaged changes since the last commit.</td>
-    </tr>
-    <tr>
-      <td><code>git diff --staged</code></td>
-      <td>Show staged changes (what you've <code>add</code>ed).</td>
-    </tr>
-    <tr>
-      <td><code>git blame &lt;file&gt;</code></td>
-      <td>Show who last modified each line of a file and in which commit.</td>
-    </tr>
-  </tbody>
-</table>
+<div class="accordion-item">
+  <button class="accordion-header">
+    V. Inspecting & Comparing (Detective)
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-content">
+    <p><em>Figuring out what happened and when.</em></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>git log</code></td>
+          <td>Show the commit history.</td>
+          <td><code>git log</code></td>
+        </tr>
+        <tr>
+          <td><code>git log --oneline --graph --all</code></td>
+          <td>Fancy, compact history view with branch topology. <strong>Memorize this.</strong></td>
+          <td><code>git log --oneline --graph --all</code></td>
+        </tr>
+        <tr>
+          <td><code>git diff</code></td>
+          <td>Show unstaged changes since the last commit.</td>
+          <td><code>git diff</code></td>
+        </tr>
+        <tr>
+          <td><code>git diff --staged</code></td>
+          <td>Show staged changes (what you've <code>add</code>ed).</td>
+          <td><code>git diff --staged</code></td>
+        </tr>
+        <tr>
+          <td><code>git blame &lt;file&gt;</code></td>
+          <td>Show who last modified each line of a file and in which commit.</td>
+          <td><code>git blame README.md</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<h2>VI. Synchronizing with a Remote (Collaborator)</h2>
-<p><em>Working with others on GitHub/GitLab.</em></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>git fetch origin</code></td>
-      <td>Download all changes from the remote <strong>without</strong> merging them. "See what others have done."</td>
-    </tr>
-    <tr>
-      <td><code>git pull --rebase origin main</code></td>
-      <td><strong>Best practice pull.</strong> Fetches remote changes and rebases your commits on top of them. Cleaner than a merge.</td>
-    </tr>
-    <tr>
-      <td><code>git push origin --delete &lt;branch&gt;</code></td>
-      <td>Delete a branch on the remote (e.g., after merging a Pull Request).</td>
-    </tr>
-    <tr>
-      <td><code>git remote -v</code></td>
-      <td>Show the URLs of your connected remote repositories.</td>
-    </tr>
-  </tbody>
-</table>
-<h3>Deleting a Remote Branch in Git</h3>
-<p>Deleting a remote branch is a common task when you've merged a feature branch and want to clean up. Here's how to do it:</p>
-<h4>The Command</h4>
-<div class="code-block"><pre><code>git push origin --delete branch-name</code></pre></div>
-<p>or the shorter equivalent:</p>
-<div class="code-block"><pre><code>git push origin :branch-name</code></pre></div>
-<h4>Step-by-Step Explanation</h4>
-<ol>
-  <li><strong>First, check what remote branches exist:</strong>
-    <div class="code-block"><pre><code>git branch -r</code></pre></div>
-  </li>
-  <li><strong>Delete the remote branch:</strong>
-    <div class="code-block"><pre><code># Example: delete a branch named "feature-login"
+<div class="accordion-item">
+  <button class="accordion-header">
+    VI. Synchronizing with a Remote (Collaborator)
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-content">
+    <p><em>Working with others on GitHub/GitLab.</em></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>git fetch origin</code></td>
+          <td>Download all changes from the remote <strong>without</strong> merging them. "See what others have done."</td>
+          <td><code>git fetch origin</code></td>
+        </tr>
+        <tr>
+          <td><code>git pull --rebase origin main</code></td>
+          <td><strong>Best practice pull.</strong> Fetches remote changes and rebases your commits on top of them. Cleaner than a merge.</td>
+          <td><code>git pull --rebase origin main</code></td>
+        </tr>
+        <tr>
+          <td><code>git push origin --delete &lt;branch&gt;</code></td>
+          <td>Delete a branch on the remote (e.g., after merging a Pull Request).</td>
+          <td><code>git push origin --delete old-feature</code></td>
+        </tr>
+        <tr>
+          <td><code>git remote -v</code></td>
+          <td>Show the URLs of your connected remote repositories.</td>
+          <td><code>git remote -v</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Deleting a Remote Branch in Git</h3>
+    <p>Deleting a remote branch is a common task when you've merged a feature branch and want to clean up. Here's how to do it:</p>
+    <h4>The Command</h4>
+    <div class="code-block"><pre><code>git push origin --delete branch-name</code></pre></div>
+    <p>or the shorter equivalent:</p>
+    <div class="code-block"><pre><code>git push origin :branch-name</code></pre></div>
+    <h4>Step-by-Step Explanation</h4>
+    <ol>
+      <li><strong>First, check what remote branches exist:</strong>
+        <div class="code-block"><pre><code>git branch -r</code></pre></div>
+      </li>
+      <li><strong>Delete the remote branch:</strong>
+        <div class="code-block"><pre><code># Example: delete a branch named "feature-login"
 git push origin --delete feature-login</code></pre></div>
-  </li>
-  <li><strong>Verify it's gone:</strong>
-    <div class="code-block"><pre><code>git branch -r  # Should no longer show the deleted branch</code></pre></div>
-  </li>
-</ol>
-<h4>Important Notes</h4>
-<ul>
-  <li><strong>You can't delete the default branch</strong> (usually <code>main</code> or <code>master</code>) unless you change the default first</li>
-  <li><strong>Other team members</strong> will need to run <code>git fetch --prune</code> to sync their local remote-tracking branches</li>
-  <li><strong>Deleting a remote branch doesn't delete local branches</strong> - you'll need to do that separately</li>
-</ul>
-<h4>Example Workflow</h4>
-<div class="code-block"><pre><code># List all remote branches
+      </li>
+      <li><strong>Verify it's gone:</strong>
+        <div class="code-block"><pre><code>git branch -r  # Should no longer show the deleted branch</code></pre></div>
+      </li>
+    </ol>
+    <h4>Important Notes</h4>
+    <ul>
+      <li><strong>You can't delete the default branch</strong> (usually <code>main</code> or <code>master</code>) unless you change the default first</li>
+      <li><strong>Other team members</strong> will need to run <code>git fetch --prune</code> to sync their local remote-tracking branches</li>
+      <li><strong>Deleting a remote branch doesn't delete local branches</strong> - you'll need to do that separately</li>
+    </ul>
+    <h4>Example Workflow</h4>
+    <div class="code-block"><pre><code># List all remote branches
 git branch -r
 
 # Delete the remote feature-login branch
@@ -325,13 +389,76 @@ git branch -d feature-login
 
 # Clean up remote-tracking references
 git fetch --prune</code></pre></div>
-<h4>What If You Get an Error?</h4>
-<p>If you see an error like <code>remote ref does not exist</code>, it means:
-<ol>
-  <li>The branch was already deleted, or</li>
-  <li>You typed the branch name incorrectly</li>
-</ol>
-<p>Always double-check with <code>git branch -r</code> first!</p>
+    <h4>What If You Get an Error?</h4>
+    <p>If you see an error like <code>remote ref does not exist</code>, it means:</p>
+    <ol>
+      <li>The branch was already deleted, or</li>
+      <li>You typed the branch name incorrectly</li>
+    </ol>
+    <p>Always double-check with <code>git branch -r</code> first!</p>
+  </div>
+</div>
+
+<div class="accordion-item">
+  <button class="accordion-header">
+    VII. Troubleshooting SSH Issues
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-content">
+    <p>If you are having trouble pushing to a remote repository due to a "Permission denied" error, you might have an issue with your SSH key configuration. Here is a step-by-step guide to check and fix it.</p>
+    <h3>Step 1: Check for Existing SSH Keys</h3>
+    <p>First, check if you have an SSH key file. The most common filenames are <code>id_rsa</code>, <code>id_ed25519</code>, or <code>id_ecdsa</code>. You can list the files in your <code>~/.ssh</code> directory with this command:</p>
+    <div class="code-block"><pre><code>ls -al ~/.ssh</code></pre></div>
+    <p>If you see files like <code>id_ed25519</code> and <code>id_ed25519.pub</code>, you have an SSH key.</p>
+    <h3>Step 2: Start the SSH Agent</h3>
+    <p>The ssh-agent is a background program that handles your SSH keys. You need to make sure it's running. You can start it with this command in your terminal:</p>
+    <div class="code-block"><pre><code>eval "$(ssh-agent -s)"</code></pre></div>
+    <p>You should see a message like <code>Agent pid 12345</code>.</p>
+    <h3>Step 3: Add Your SSH Key to the Agent</h3>
+    <p>Once the agent is running, you need to add your SSH key to it. If your key file is <code>id_ed25519</code>, you can use this command:</p>
+    <div class="code-block"><pre><code>ssh-add ~/.ssh/id_ed25519</code></pre></div>
+    <p>If it asks for a passphrase, enter the one you set for your SSH key. You should see a confirmation like <code>Identity added</code>.</p>
+    <h3>Step 4: Test Your Connection to GitHub</h3>
+    <p>Finally, test your connection to GitHub with this command:</p>
+    <div class="code-block"><pre><code>ssh -T git@github.com</code></pre></div>
+    <p>If everything is configured correctly, you should see a message like this:</p>
+    <div class="code-block"><pre><code>Hi username! You've successfully authenticated, but GitHub does not provide shell access.</code></pre></div>
+    <p>If you see this message, your SSH key is correctly configured, and you should be able to push to your repository.</p>
+  </div>
+</div>
+
+<div class="accordion-item">
+    <button class="accordion-header">
+        VIII. First-Time Setup: New Computer & GitHub Account
+        <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-content">
+        <p>This guide will walk you through the process of setting up Git and GitHub on a new computer, from installation to connecting to your GitHub account.</p>
+        <h3>Step 1: Install Git</h3>
+        <p>First, you need to install Git on your computer. You can download it from the official website: <a href="https://git-scm.com/downloads" target="_blank">https://git-scm.com/downloads</a>. Follow the installation instructions for your operating system.</p>
+        <h3>Step 2: Configure Your Git Identity</h3>
+        <p>Once Git is installed, you need to configure your name and email address. This information will be used for every commit you create.</p>
+        <div class="code-block"><pre><code>git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"</code></pre></div>
+        <p>Replace "Your Name" and "your.email@example.com" with your actual name and the email address you will use for your GitHub account.</p>
+        <h3>Step 3: Create a New GitHub Account</h3>
+        <p>If you don't have a GitHub account, go to <a href="https://github.com/join" target="_blank">https://github.com/join</a> and create a new account. Follow the instructions on the website.</p>
+        <h3>Step 4: Generate a New SSH Key</h3>
+        <p>An SSH key is used to securely connect your computer to your GitHub account. To generate a new SSH key, open your terminal and run the following command:</p>
+        <div class="code-block"><pre><code>ssh-keygen -t ed25519 -C "your.email@example.com"</code></pre></div>
+        <p>When you're prompted to "Enter a file in which to save the key," you can press Enter to accept the default file location. You will also be asked to enter a passphrase, which is highly recommended for security.</p>
+        <h3>Step 5: Add Your SSH Key to Your GitHub Account</h3>
+        <p>Now you need to add your new SSH key to your GitHub account. First, you need to copy the public key to your clipboard. You can do this with the following command:</p>
+        <div class="code-block"><pre><code>pbcopy &lt; ~/.ssh/id_ed25519.pub</code></pre></div>
+        <p>If `pbcopy` is not available on your system, you can open the <code>id_ed25519.pub</code> file with a text editor and copy the content manually.</p>
+        <p>Next, go to your GitHub account settings, click on "SSH and GPG keys", and then click on "New SSH key". Give your key a title (e.g., "My New Laptop") and paste the copied key into the "Key" field. Finally, click "Add SSH key".</p>
+        <h3>Step 6: Test Your Connection</h3>
+        <p>To make sure everything is working, you can test your connection to GitHub with this command:</p>
+        <div class="code-block"><pre><code>ssh -T git@github.com</code></pre></div>
+        <p>You should see a message like "Hi username! You've successfully authenticated...".</p>
+        <p>Congratulations! You have successfully set up Git and GitHub on your new computer.</p>
+    </div>
+</div>
 </div>
 
     <!-- Command Simulator Modal -->
@@ -465,6 +592,29 @@ git fetch --prune</code></pre></div>
                     logRef('commit (initial)');
                     return 'Initialized empty Git repository in /simulator/project';
 
+                case 'switch':
+                    if (parts[2] === '-c' && parts[3]) {
+                        const newBranch = parts[3];
+                        if (gitState.branches.includes(newBranch)) {
+                            throw new Error(`Branch '${newBranch}' already exists`);
+                        }
+                        gitState.branches.push(newBranch);
+                        gitState.currentBranch = newBranch;
+                        logRef(`checkout: moving from ${gitState.currentBranch} to ${newBranch}`);
+                        return `Switched to a new branch '${newBranch}'`;
+                    } else if (parts[2] && !parts[2].startsWith('-')) {
+                        const branchName = parts[2];
+                        if (!gitState.branches.includes(branchName)) {
+                            throw new Error(`Branch '${branchName}' does not exist`);
+                        }
+                        const fromBranch = gitState.currentBranch;
+                        gitState.currentBranch = branchName;
+                        logRef(`checkout: moving from ${fromBranch} to ${gitState.currentBranch}`);
+                        return `Switched to branch '${branchName}'`;
+                    } else {
+                        throw new Error('Invalid switch command');
+                    }
+
                 case 'checkout':
                     if (parts[2] === '-b' && parts[3]) {
                         const newBranch = parts[3];
@@ -539,6 +689,10 @@ git fetch --prune</code></pre></div>
                     return `Merged branch '${mergeBranch}' into '${gitState.currentBranch}'`;
 
                 case 'branch':
+                    if (parts[2] === '-a' || parts[2] === '-r') {
+                        // Simplified: no remote branches in simulator
+                        return gitState.branches.map(b => b === gitState.currentBranch ? `* ${b}` : `  ${b}`).join('\n');
+                    }
                     if ((parts[2] === '-d' || parts[2] === '-D') && parts[3]) {
                         const branchToDelete = parts[3];
                         if (branchToDelete === 'main') {
@@ -665,7 +819,7 @@ git fetch --prune</code></pre></div>
                     return showOutput;
 
                 default:
-                    const availableCmds = ['init', 'add', 'commit', 'branch', 'checkout', 'status', 'merge', 'log', 'show', 'remote', 'fetch', 'tag', 'reflog', 'reset', 'rm'].join(', ');
+                    const availableCmds = ['init', 'add', 'commit', 'branch', 'checkout', 'status', 'merge', 'log', 'show', 'remote', 'fetch', 'tag', 'reflog', 'reset', 'rm', 'switch'].join(', ');
                     throw new Error(`'${subCmd}' is not a recognized command. Available commands: ${availableCmds}`);
             }
         }
@@ -937,9 +1091,6 @@ git fetch --prune</code></pre></div>
 
         // Add smooth scrolling for internal links
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize with first tab
-            showTab(null, 'basics');
-
             // Add keypress listener for simulator
             const commandInput = document.getElementById('commandInput');
             if (commandInput) {
@@ -950,19 +1101,59 @@ git fetch --prune</code></pre></div>
                 });
             }
 
+            // Accordion functionality
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const accordionItem = header.parentElement;
+                    const accordionContent = accordionItem.querySelector('.accordion-content');
+                    const accordionIcon = header.querySelector('.accordion-icon');
+
+                    const isOpening = accordionContent.style.display !== 'block';
+
+                    // Close all other accordions
+                    accordionHeaders.forEach(otherHeader => {
+                        const otherAccordionItem = otherHeader.parentElement;
+                        const otherAccordionContent = otherAccordionItem.querySelector('.accordion-content');
+                        const otherAccordionIcon = otherHeader.querySelector('.accordion-icon');
+                        otherAccordionContent.style.display = 'none';
+                        otherAccordionIcon.textContent = '+';
+                    });
+
+                    if (isOpening) {
+                        accordionContent.style.display = 'block';
+                        accordionIcon.textContent = '-';
+                    }
+                });
+            });
+
             // Search functionality
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('keyup', function() {
                 const filter = searchInput.value.toLowerCase();
-                const cards = document.querySelectorAll('.scenario-card');
-                cards.forEach(card => {
-                    const title = card.querySelector('.scenario-title').textContent.toLowerCase();
-                    const description = card.querySelector('.scenario-description')?.textContent.toLowerCase() || '';
-                    const code = card.querySelector('pre')?.textContent.toLowerCase() || '';
-                    if (title.includes(filter) || description.includes(filter) || code.includes(filter)) {
-                        card.style.display = '';
+                const rows = document.querySelectorAll('.table tbody tr');
+                const accordionContents = document.querySelectorAll('.accordion-content');
+                const accordionIcons = document.querySelectorAll('.accordion-icon');
+
+                if (filter) {
+                    // Open all accordions to show search results
+                    accordionContents.forEach(content => content.style.display = 'block');
+                    accordionIcons.forEach(icon => icon.textContent = '-');
+                } else {
+                    // Close all accordions when search is cleared
+                    accordionContents.forEach(content => content.style.display = 'none');
+                    accordionIcons.forEach(icon => icon.textContent = '+');
+                }
+
+                rows.forEach(row => {
+                    const command = row.cells[0].textContent.toLowerCase();
+                    const description = row.cells[1].textContent.toLowerCase();
+                    const example = row.cells[2] ? row.cells[2].textContent.toLowerCase() : '';
+                    
+                    if (command.includes(filter) || description.includes(filter) || example.includes(filter)) {
+                        row.style.display = '';
                     } else {
-                        card.style.display = 'none';
+                        row.style.display = 'none';
                     }
                 });
             });
