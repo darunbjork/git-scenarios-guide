@@ -116,3 +116,75 @@ git-scenarios-guide/
     ├── rebase-pull.md
     └── deleting-remote-branches.md
 ```
+
+---
+
+## Deleting a Git Repository
+
+To delete an initialized Git directory, you need to remove the `.git` folder. Here's how to do it:
+
+## Step 1: Check if it's a Git repository
+```bash
+ls -la
+```
+Look for the `.git` directory in the output. If you see it, you're in a Git repository.
+
+## Step 2: Remove the Git repository
+
+### Option A: Delete just the .git folder (keeps your files)
+```bash
+rm -rf .git
+```
+
+### Option B: Delete the entire directory (including all files)
+```bash
+# First, navigate out of the directory if you're inside it
+cd ..
+
+# Then delete the entire directory
+rm -rf your-directory-name/
+```
+
+## Step 3: Verify it's no longer a Git repo
+```bash
+ls -la
+```
+The `.git` folder should be gone. You can also check with:
+```bash
+git status
+```
+This should show: `fatal: not a git repository (or any of the parent directories): .git`
+
+## Example workflow:
+```bash
+# 1. Check what's in the directory
+$ ls -la
+total 12
+drwxr-xr-x  3 user user 4096 Dec 10 14:30 .
+drwxr-xr-x 10 user user 4096 Dec 10 14:30 ..
+drwxr-xr-x  7 user user 4096 Dec 10 14:30 .git  # This is what we want to remove
+-rw-r--r--  1 user user   23 Dec 10 14:30 README.md
+
+# 2. Remove the .git folder
+$ rm -rf .git
+
+# 3. Verify it's gone
+$ ls -la
+total 8
+drwxr-xr-x  2 user user 4096 Dec 10 14:31 .
+drwxr-xr-x 10 user user 4096 Dec 10 14:30 ..
+-rw-r--r--  1 user user   23 Dec 10 14:30 README.md
+
+# 4. Confirm it's no longer a Git repo
+$ git status
+fatal: not a git repository (or any of the parent directories): .git
+```
+
+## Important Notes:
+- `rm -rf` is **permanent** - deleted files cannot be easily recovered
+- If you want to keep your files but remove Git tracking, use `rm -rf .git`
+- If you want to delete everything including your files, use `rm -rf your-directory-name/`
+- Be very careful with `rm -rf` - double-check you're in the right directory!
+
+## Alternative: Use a file manager
+You can also delete the `.git` folder using your system's file manager (Finder on Mac, File Explorer on Windows) by showing hidden files and deleting the `.git` folder.
